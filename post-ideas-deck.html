@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post Ideas Deck</title>
+<style>
+  :root{
+    --navy:#1A1A2E;
+    --navy-2:#21213B;
+    --navy-3:#2A2A4A;
+    --coral:#E94560;
+    --gold:#F5A623;
+    --white:#FFFFFF;
+    --muted:#B9B9D1;
+    --line:rgba(255,255,255,.09);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--navy);
+    color:var(--white);
+    font-family:Manrope, -apple-system, "Segoe UI", sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 72px}
+
+  /* ---------- header ---------- */
+  .eyebrow{
+    font-family:Montserrat,sans-serif;
+    font-size:.78rem;font-weight:700;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin:0 0 14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--coral)}
+  header h1{
+    font-family:Montserrat,sans-serif;
+    font-size:clamp(2rem,5vw,3.1rem);font-weight:900;
+    line-height:1.06;margin:0;text-wrap:balance;letter-spacing:-.01em;
+  }
+  header h1 .accent{color:var(--coral)}
+  header h1 .gold{color:var(--gold)}
+  header p.sub{
+    color:var(--muted);max-width:56ch;margin:14px 0 0;
+    font-size:1.05rem;
+  }
+  .brand-pill{
+    display:inline-flex;align-items:center;gap:10px;margin:26px 0 0;
+    background:var(--navy-2);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;font-family:Montserrat,sans-serif;
+    font-weight:700;font-size:.86rem;letter-spacing:.04em;
+  }
+  .export-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px}
+  #exportBtn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--coral);color:var(--navy);border:none;cursor:pointer;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:.95rem;
+    letter-spacing:.02em;padding:13px 20px;border-radius:12px;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  #exportBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  #exportBtn:disabled{cursor:wait;filter:brightness(.8)}
+  #exportBtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .export-note{color:var(--muted);font-size:.85rem;max-width:46ch;margin:0}
+
+  /* ---------- logo mark ---------- */
+  .mark{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--coral);color:var(--navy);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:Montserrat,sans-serif;font-weight:900;
+    font-size:1rem;border:2px solid var(--gold);
+  }
+
+  /* ---------- slides grid ---------- */
+  .grid{
+    display:grid;grid-template-columns:1fr;
+    gap:26px;margin:44px 0 0;
+  }
+  @media(min-width:820px){.grid{grid-template-columns:1fr 1fr}}
+  .frame{
+    padding:0;background:var(--navy);border-radius:var(--radius);
+    border:1px solid var(--line);overflow:hidden;
+    transition:transform .25s ease;
+  }
+  .frame:hover{transform:translateY(-3px)}
+  .slide{
+    position:relative;aspect-ratio:1/1;width:100%;
+    display:flex;flex-direction:column;padding:clamp(20px,4vw,34px);
+    overflow:hidden;background:var(--navy);
+  }
+  .slide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 80% -10%, rgba(233,69,96,.14), transparent 55%);
+  }
+  .slide > *{position:relative}
+  .slide-top{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:Montserrat,sans-serif;font-size:.72rem;font-weight:700;
+    letter-spacing:.18em;color:var(--muted);text-transform:uppercase;
+  }
+  .slide-top .co{
+    display:inline-flex;align-items:center;gap:9px;color:var(--white);
+  }
+  .slide-top .co span{letter-spacing:.22em}
+  .slide-top .num{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .slide-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .slide-bot{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:Montserrat,sans-serif;font-size:.78rem;font-weight:600;
+    letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+    padding-top:18px;border-top:1px solid var(--line);
+  }
+
+  /* cover */
+  .cover-step{background:var(--navy)}
+  .big-five{font-family:Montserrat,sans-serif;font-weight:900;line-height:.9;color:var(--coral);font-size:clamp(5rem,14vw,7.4rem)}
+  .slide h2{
+    font-family:Montserrat,sans-serif;font-weight:900;line-height:1.04;
+    font-size:clamp(1.5rem,4.5vw,2.6rem);letter-spacing:-.01em;
+    text-wrap:balance;margin:14px 0 0;
+  }
+  .slide h2 .gold{color:var(--gold)}
+  .gold-rule{width:54px;height:4px;background:var(--gold);border-radius:2px;margin:18px 0}
+  .lede{color:var(--muted);font-size:clamp(.95rem,2.4vw,1.08rem);margin:0}
+  .lede b{color:var(--white);font-weight:600}
+
+  /* idea slides */
+  .idea-tag{
+    font-family:Montserrat,sans-serif;font-size:.74rem;font-weight:800;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .idea-tag::before{content:"";width:22px;height:2px;background:var(--gold)}
+  .idea-no{
+    display:flex;align-items:baseline;gap:10px;margin:16px 0 0;
+    font-family:Montserrat,sans-serif;color:var(--muted);
+  }
+  .idea-no .n{font-size:clamp(2.2rem,6vw,3rem);font-weight:900;color:var(--coral)}
+  .idea-no .lbl{font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+  .slide h3{
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(1.45rem,4.4vw,2.4rem);
+    line-height:1.06;letter-spacing:-.01em;text-wrap:balance;margin:6px 0 0;
+  }
+  .slide .hook{color:var(--white);font-weight:600;font-size:clamp(1rem,2.6vw,1.15rem);margin:18px 0 6px}
+  .slide .body{color:var(--muted);font-size:clamp(.9rem,2.3vw,1.02rem);margin:0;max-width:34ch}
+
+  /* cta slide */
+  .cta-box{
+    margin-top:20px;display:inline-flex;align-items:center;gap:12px;
+    background:var(--coral);color:var(--navy);border-radius:14px;
+    padding:14px 20px;font-family:Montserrat,sans-serif;font-weight:900;
+    font-size:clamp(1rem,3vw,1.25rem);letter-spacing:.02em;
+  }
+  .cta-box .q{color:rgba(26,26,46,.7);font-weight:700}
+
+  /* ---------- copy sections ---------- */
+  .copy{display:grid;gap:26px;margin-top:52px}
+  @media(min-width:820px){.copy{grid-template-columns:1fr 1fr}}
+  .copy h4{
+    font-family:Montserrat,sans-serif;font-size:.78rem;font-weight:800;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 14px;
+  }
+  pre{
+    background:var(--navy-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;font-family:Manrope,sans-serif;font-size:.95rem;
+    color:var(--white);line-height:1.65;margin:0;white-space:pre-wrap;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    background:var(--navy-3);border:1px solid var(--line);color:var(--muted);
+    font-size:.86rem;padding:7px 12px;border-radius:999px;
+    font-family:Montserrat,sans-serif;font-weight:600;
+  }
+  footer{
+    margin-top:52px;color:var(--muted);font-size:.9rem;line-height:1.6;
+  }
+  footer b{color:var(--white)}
+  @media (prefers-reduced-motion: reduce){
+    .frame{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Portfolio · Sahadat Creates</p>
+    <h1>5 Post Ideas<br>That <span class="accent">SELL</span> <span class="gold">🚀</span></h1>
+    <p class="sub">A 7-slide Instagram carousel for your portfolio — screenshot each square to upload as your post. Every card is 1:1 (1080×1080).</p>
+    <div class="brand-pill"><span class="mark">S</span> @sahadat.creates</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download all slides (1080×1080 PNG)</button>
+      <p class="export-note">Button ta click korle 7 ta PNG file (slide-01 to slide-07) download hobe — screenshot thikthak quality pabe.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- SLIDE 1 — COVER -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">01 / 07</span>
+        </div>
+        <div class="slide-body">
+          <div class="big-five">5</div>
+          <h2>Instagram Post Ideas That Sell</h2>
+          <div class="gold-rule"></div>
+          <p class="lede">Five content types that actually drive <b>engagement</b> and <b>sales</b>.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>swipe →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 — IDEA 1 -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">02 / 07</span>
+        </div>
+        <div class="slide-body">
+          <span class="idea-tag">Idea 01</span>
+          <div class="idea-no"><span class="n">1</span><span class="lbl">Behind The Scenes</span></div>
+          <p class="hook">Show your process.</p>
+          <p class="body">Real work builds real trust — people follow the human behind the page, not just the product.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>keep swiping →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 — IDEA 2 -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">03 / 07</span>
+        </div>
+        <div class="slide-body">
+          <span class="idea-tag">Idea 02</span>
+          <div class="idea-no"><span class="n">2</span><span class="lbl">Customer Reviews</span></div>
+          <p class="hook">Let fans sell for you.</p>
+          <p class="body">Social proof converts better than any ad. Share real screenshots and shout-outs.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>keep swiping →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 — IDEA 3 -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">04 / 07</span>
+        </div>
+        <div class="slide-body">
+          <span class="idea-tag">Idea 03</span>
+          <div class="idea-no"><span class="n">3</span><span class="lbl">Before &amp; After</span></div>
+          <p class="hook">Show the results.</p>
+          <p class="body">Proof beats promises — a transformation is the strongest pitch you own.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>keep swiping →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 — IDEA 4 -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">05 / 07</span>
+        </div>
+        <div class="slide-body">
+          <span class="idea-tag">Idea 04</span>
+          <div class="idea-no"><span class="n">4</span><span class="lbl">Tips &amp; Tricks</span></div>
+          <p class="hook">Teach something useful.</p>
+          <p class="body">Educational posts earn saves and shares — and the algorithm rewards both.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>keep swiping →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 — IDEA 5 -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">06 / 07</span>
+        </div>
+        <div class="slide-body">
+          <span class="idea-tag">Idea 05</span>
+          <div class="idea-no"><span class="n">5</span><span class="lbl">Offer / Discount</span></div>
+          <p class="hook">Create urgency.</p>
+          <p class="body">Limited-time offers drive action. A little FOMO, used fairly, sells.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>one more →</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 — CTA -->
+    <div class="frame">
+      <div class="slide">
+        <div class="slide-top">
+          <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+          <span class="num">07 / 07</span>
+        </div>
+        <div class="slide-body">
+          <h2 style="font-size:clamp(1.5rem,4.5vw,2.3rem)">Want these for <span class="gold">YOUR</span> brand?</h2>
+          <div class="cta-box"><span class="q">DM</span> “SAMPLE”</div>
+          <p class="lede" style="margin-top:16px">I'll send you a <b>free sample post</b> — no strings attached.</p>
+        </div>
+        <div class="slide-bot"><span>@sahadat.creates</span><span>📩 DM</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>Content sells when it's STRATEGY, not just pretty pictures 🎯
+
+Here are 5 post ideas I create for my clients that actually drive results 📈
+
+Swipe 👉 for each idea.
+
+Need content for YOUR brand?
+DM "SAMPLE" and I'll create a FREE sample post for you! 💬</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#InstagramTips</span><span class="tag">#ContentStrategy</span>
+        <span class="tag">#ReelsTips</span><span class="tag">#GrowYourBrand</span>
+        <span class="tag">#ContentCreator</span><span class="tag">#SocialMediaTips</span>
+        <span class="tag">#InstagramMarketing</span><span class="tag">#BDContent</span>
+        <span class="tag">#DigitalMarketingBD</span><span class="tag">#SahadatCreates</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>Upload guide:</b> Instagram → <b>+</b> → select all 7 screenshots → order oitai (01 → 07) → caption paste → hashtags first comment e → post 📸</p>
+    <p>Graphics echaile Canva te same design replicate korte parbo — font: <b>Montserrat</b> (titles) + <b>Manrope</b> (body), colors: navy <b>#1A1A2E</b>, coral <b>#E94560</b>, gold <b>#F5A623</b>, white <b>#FFFFFF</b>.</p>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn = document.getElementById('exportBtn');
+    if(!btn || typeof html2canvas === 'undefined') return;
+
+    function renderSlide(el, index){
+      var scale = 1080 / el.clientWidth;               // exact 1080×1080 output
+      return html2canvas(el, {scale: scale, backgroundColor: '#1A1A2E', useCORS: true})
+        .then(function(canvas){
+          var url = canvas.toDataURL('image/png');
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'slide-' + String(index).padStart(2,'0') + '.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+    }
+
+    btn.addEventListener('click', function(){
+      var slides = document.querySelectorAll('.slide');
+      var total = slides.length;
+      btn.disabled = true;
+      btn.textContent = 'Exporting… 0/' + total;
+
+      var chain = Promise.resolve();
+      slides.forEach(function(sl, i){
+        chain = chain
+          .then(function(){ btn.textContent = 'Exporting… ' + (i+1) + '/' + total; return renderSlide(sl, i+1); })
+          .then(function(){ return new Promise(function(r){ setTimeout(r, 700); }); });
+      });
+      chain.then(function(){
+        btn.disabled = false;
+        btn.textContent = '⬇️ Download all slides (1080×1080 PNG)';
+      });
+    });
+  })();
+</script>
+</body>
+</html>

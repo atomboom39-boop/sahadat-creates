@@ -1,0 +1,114 @@
+<title>Cafe Demo Post</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Demo Post · Client Pitch</p>
+    <h1>Dhaka Cafe — <span class="accent">Photo-led Pizza Offer</span></h1>
+    <p class="sub">Oder vibe er moto — ekta real food photo + minimal caption. Client er nijer pizza photo nibo, tapori placeholder e <b>ekhane demo hisebe ekta pizza photo</b> deowa.</p>
+    <div class="brand-pill">🍕 Good Food. Good Mood. · @dhaka.cafe</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download demo post (1080×1080 PNG)</button>
+      <p class="export-note">Export er images photo thakbe — jodi download er moddhe photo kormo na, tahole chrome e image cache hoye jabe.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide" id="slide">
+      <img class="pic" id="pic" crossorigin="anonymous"
+           src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1080&q=80"
+           alt="Pizza">
+      <div class="scrim"></div>
+      <div class="slide-top">
+        <span class="tag">🍕 Good Food. Good Mood.</span>
+        <span class="handle">@dhaka.cafe</span>
+      </div>
+      <div class="slide-bot">
+        <p class="eyebrow-post">Special Combo</p>
+        <h2 class="headline">Pizza Night</h2>
+        <p class="offer-line">
+          <span class="what">1 Medium Pizza + 1 Soft Drink</span>
+          <span class="price">= 599৳</span>
+        </p>
+        <p class="loc">📍 Mirpur-10, DESCO er pichoner road, Lane-18, Block-C</p>
+        <span class="cta">DM “PIZZA” to order</span>
+      </div>
+    </div>
+    <p class="img-credit">Demo photo: Unsplash · Client er project e oder nijer pizza photo use korbe</p>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>🍕 PIZZA NIGHT is here!
+
+Golden crust, loads of cheese —
+fresh out of our oven. 😋
+
+🔥 Special Combo
+1 Medium Pizza + 1 Soft Drink = 599৳
+
+📍 Mirpur-10, DESCO er pichoner road,
+Lane-18, Block-C
+
+📩 DM "PIZZA" to order
+
+Good Food. Good Mood. Every Day.</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#DhakaCafe</span><span class="tag">#PizzaDhaka</span>
+        <span class="tag">#Mirpur10</span><span class="tag">#DhakaFood</span>
+        <span class="tag">#PizzaLover</span><span class="tag">#ItalianFoodDhaka</span>
+        <span class="tag">#CheesePizza</span><span class="tag">#FoodieBangladesh</span>
+        <span class="tag">#MirpurCafe</span><span class="tag">#BangladeshFood</span>
+      </div>
+    </div>
+    <div class="dm-pitch">
+      <h4>📩 DM Pitch Message — @dhaka.cafe ke pathaite</h4>
+      <pre>Assalamualaikum @dhaka.cafe team! 👋
+
+Ami Sahadat — content creator. Apnar page ta
+dekhechi — reel content onk valo lagey!
+
+Ami apnar brand er jonno ekta DEMO post ready
+korechi — ekdom free, kono obligation nai. 🍕
+
+[Export kora PNG ta attach kore pathaben]
+
+Positive hole monthly plan er kotha bolte parbo —
+photo post, reels scripts, captions, hashtags
+sob ready kore dibo. 💪
+
+Ki mone hoy? 🙌</pre>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn=document.getElementById('exportBtn');
+    if(!btn||typeof html2canvas==='undefined')return;
+    function imgReady(){
+      var img=document.getElementById('pic');
+      return img.complete?Promise.resolve():Promise.resolve(img.decode().then(function(){},function(){}));
+    }
+    btn.addEventListener('click',function(){
+      var el=document.getElementById('slide');
+      btn.disabled=true;btn.textContent='Exporting…';
+      imgReady().then(function(){
+        var scale=1080/el.clientWidth;
+        return html2canvas(el,{scale:scale,useCORS:true});
+      }).then(function(canvas){
+        var a=document.createElement('a');
+        a.href=canvas.toDataURL('image/png');
+        a.download='demo-dhaka-cafe-pizza-night.png';
+        document.body.appendChild(a);a.click();a.remove();
+        btn.disabled=false;btn.textContent='⬇️ Download demo post (1080×1080 PNG)';
+      });
+    });
+  })();
+</script>

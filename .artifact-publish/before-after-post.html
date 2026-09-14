@@ -1,0 +1,101 @@
+<title>Before After Post</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Portfolio · Post 3</p>
+    <h1>Before <span class="accent">vs</span> After — Skill Showcase</h1>
+    <p class="sub">Ekta single Instagram post — left side beshi professional, right side premium. Click kore export korle direct 1080×1080 PNG pabe.</p>
+    <div class="brand-pill"><span class="mark">S</span> @sahadat.creates</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download slide (1080×1080 PNG)</button>
+      <p class="export-note">Ei post ta single image — export kore direct upload korte parbi.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide">
+      <div class="slide-top">
+        <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+        <span class="num" style="font-variant-numeric:tabular-nums">POST 03</span>
+      </div>
+
+      <div class="split">
+        <div class="half before">
+          <span class="lbl">BEFORE <span class="x">✕</span></span>
+          <span class="line"></span>
+          <ul>
+            <li><span class="x">✕</span>No strategy</li>
+            <li><span class="x">✕</span>Plain design</li>
+            <li><span class="x">✕</span>No hashtags</li>
+            <li><span class="x">✕</span>No call-to-action</li>
+          </ul>
+        </div>
+        <div class="half after">
+          <span class="lbl">AFTER <span class="ok">✓</span></span>
+          <span class="line"></span>
+          <ul>
+            <li><span class="v">✓</span>Clear <span class="gld">strategy</span></li>
+            <li><span class="v">✓</span>Professional design</li>
+            <li><span class="v">✓</span>Smart hashtags</li>
+            <li><span class="v">✓</span>Strong CTA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta">Want this for <span class="gld">YOUR</span> brand? <span class="dm">DM "READY"</span></div>
+
+      <div class="slide-bot"><span>@sahadat.creates</span><span>📩 FREE sample</span></div>
+    </div>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>Left 👈 = Posting without strategy
+Right 👉 = Content with PROFESSIONAL touch
+
+The difference? Strategy + Design + Right
+Captions + Hashtags 🎯
+
+This is what I do for brands every day 💪
+
+Difference dekhle ki mone hoy?
+Comment koro! 💬
+
+DM "READY" for your brand's
+FREE sample post! 🚀</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#ContentBeforeAndAfter</span><span class="tag">#ContentCreator</span>
+        <span class="tag">#InstagramDesign</span><span class="tag">#ProfessionalContent</span>
+        <span class="tag">#GrowOnInstagram</span><span class="tag">#BDContent</span>
+        <span class="tag">#SocialMediaMarketing</span><span class="tag">#SahadatCreates</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn = document.getElementById('exportBtn');
+    if(!btn || typeof html2canvas === 'undefined') return;
+    btn.addEventListener('click', function(){
+      var el = document.querySelector('.slide');
+      btn.disabled = true; btn.textContent = 'Exporting…';
+      var scale = 1080 / el.clientWidth;
+      html2canvas(el, {scale: scale, backgroundColor: '#1A1A2E', useCORS: true})
+        .then(function(canvas){
+          var a = document.createElement('a');
+          a.href = canvas.toDataURL('image/png');
+          a.download = 'post3-before-after.png';
+          document.body.appendChild(a); a.click(); a.remove();
+          btn.disabled = false; btn.textContent = '⬇️ Download slide (1080×1080 PNG)';
+        });
+    });
+  })();
+</script>

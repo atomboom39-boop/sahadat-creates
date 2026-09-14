@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Index</title>
+<style>
+  :root{
+    --navy:#1A1A2E;--navy-2:#21213B;--navy-3:#2A2A4A;
+    --coral:#E94560;--gold:#F5A623;--white:#FFFFFF;--muted:#B9B9D1;--line:rgba(255,255,255,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--navy);color:var(--white);font-family:Manrope,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  .eyebrow{font-family:Montserrat,sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--coral)}
+  h1{font-family:Montserrat,sans-serif;font-size:2rem;font-weight:900;line-height:1.1}
+  h1 .accent{color:var(--coral)}
+  p.sub{color:var(--muted);margin:12px 0 0;max-width:56ch}
+  .grid{display:grid;gap:14px;margin-top:34px}
+  a.card{display:flex;align-items:center;gap:16px;background:var(--navy-2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none;color:var(--white);transition:transform .15s ease,border-color .15s ease}
+  a.card:hover{transform:translateY(-2px);border-color:var(--coral)}
+  .emoji{font-size:1.6rem;flex:none}
+  .card h2{font-family:Montserrat,sans-serif;font-size:1.05rem;font-weight:800}
+  .card p{color:var(--muted);font-size:.9rem;margin-top:2px}
+  .card .go{color:var(--gold);font-weight:800;margin-left:auto;flex:none}
+  footer{margin-top:36px;color:var(--muted);font-size:.86rem}
+  footer b{color:var(--white)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Sahadat Creates · Local Preview</p>
+  <h1>Studio <span class="accent">Index</span></h1>
+  <p class="sub">Ten working pages, served locally from <b>D:\my projeckt</b>. Export buttons live — PNG/WebM download direkt ekhanein kaj korbe.</p>
+
+  <div class="grid">
+    <a class="card" href="30day-plan.html"><span class="emoji">📅</span><div><h2>30 Day Plan</h2><p>4-week launch plan + printable checklist</p></div><span class="go">→</span></a>
+    <a class="card" href="before-after-post.html"><span class="emoji">🔄</span><div><h2>Before After Post</h2><p>Portfolio post 03 — before/after skill showcase</p></div><span class="go">→</span></a>
+    <a class="card" href="demo-post-chikchik.html"><span class="emoji">🍗</span><div><h2>ChikChik Demo Post</h2><p>Crispy chicken fingers promo + DM pitch</p></div><span class="go">→</span></a>
+    <a class="card" href="demo-post-dhaka-cafe.html"><span class="emoji">🍕</span><div><h2>Dhaka Cafe Post</h2><p>Pizza combo offer + DM pitch</p></div><span class="go">→</span></a>
+    <a class="card" href="post-ideas-deck.html"><span class="emoji">🚀</span><div><h2>Post Ideas Deck</h2><p>7-slide carousel — ideas that sell</p></div><span class="go">→</span></a>
+    <a class="card" href="reel-dhaka-cafe.html"><span class="emoji">🎬</span><div><h2>Dhaka Cafe Reel</h2><p>20s auto-loop reel + record guide</p></div><span class="go">→</span></a>
+    <a class="card" href="reel-dhaka-cafe-maker.html"><span class="emoji">🎵</span><div><h2>Dhaka Cafe Reel Maker</h2><p>Download 20s reel with original song</p></div><span class="go">→</span></a>
+    <a class="card" href="../order-toolkit.html"><span class="emoji">🛠</span><div><h2>Order Toolkit</h2><p>Photo post designer + video script/caption generator</p></div><span class="go">→</span></a>
+    <a class="card" href="../dashboard.html"><span class="emoji">📊</span><div><h2>Studio Dashboard</h2><p>Monthly content plan, mix &amp; pipeline</p></div><span class="go">→</span></a>
+    <a class="card" href="../portfolio.html"><span class="emoji">🎨</span><div><h2>Portfolio</h2><p>Sahadat Creates — content studio showcase</p></div><span class="go">→</span></a>
+  </div>
+
+  <footer><b>Open:</b> <span style="word-break:break-all">http://localhost:8613/.artifact-publish/</span></footer>
+</div>
+</body>
+</html>

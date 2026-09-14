@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChikChik Demo Post</title>
+<style>
+  :root{
+    --bg:#141311;            /* page shell */
+    --red:#E0392B;           /* fast-food red */
+    --red-dark:#B2241A;
+    --yellow:#FFC20A;        /* playful yellow */
+    --green:#3FA34D;         /* "always fresh" green */
+    --ink:#1E1710;           /* warm black text */
+    --white:#FFFFFF;
+    --muted:#B9B9C6;
+    --line:rgba(255,255,255,.1);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:#fff;
+    font-family:Manrope,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 72px}
+  .eyebrow{
+    font-family:Montserrat,sans-serif;font-size:.76rem;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin:0 0 14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--yellow)}
+  header h1{
+    font-family:Montserrat,sans-serif;font-size:clamp(1.6rem,4.5vw,2.4rem);
+    font-weight:900;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em;
+  }
+  header h1 .accent{color:var(--yellow)}
+  header p.sub{color:var(--muted);max-width:62ch;margin:14px 0 0;font-size:1rem}
+  .brand-pill{
+    display:inline-flex;align-items:center;gap:10px;margin:22px 0 0;
+    background:rgba(255,255,255,.06);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;font-family:Montserrat,sans-serif;
+    font-weight:700;font-size:.85rem;letter-spacing:.04em;
+  }
+  .export-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:20px}
+  #exportBtn{
+    display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;
+    border:none;cursor:pointer;font-family:Montserrat,sans-serif;font-weight:900;
+    font-size:.95rem;padding:13px 20px;border-radius:12px;
+    transition:transform .15s ease,filter .15s ease;
+  }
+  #exportBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  #exportBtn:disabled{cursor:wait;filter:brightness(.8)}
+  .export-note{color:var(--muted);font-size:.85rem;max-width:50ch;margin:0}
+
+  /* ---------- the post ---------- */
+  .frame{margin-top:36px;max-width:560px;background:#0d0d10;border-radius:var(--radius);border:1px solid var(--line);overflow:hidden}
+  .slide{
+    position:relative;aspect-ratio:1/1;width:100%;overflow:hidden;
+    display:flex;flex-direction:column;background:var(--red);
+  }
+  .pic-zone{position:relative;height:52%;min-height:200px;overflow:hidden}
+  .pic-zone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .pic-zone .flag{
+    position:absolute;top:12px;left:12px;background:rgba(30,23,16,.72);
+    color:var(--yellow);font-family:Montserrat,sans-serif;font-weight:800;
+    font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    padding:8px 12px;border-radius:999px;backdrop-filter:blur(2px);
+  }
+  .pic-zone .handle{
+    position:absolute;top:12px;right:12px;background:rgba(30,23,16,.72);
+    color:#fff;font-family:Montserrat,sans-serif;font-weight:700;
+    font-size:.68rem;letter-spacing:.1em;padding:8px 12px;border-radius:999px;
+  }
+  .panel{
+    flex:1;display:flex;flex-direction:column;justify-content:center;
+    padding:16px 20px 18px;background:var(--red);gap:8px;
+  }
+  .eyebrow-post{
+    font-family:Montserrat,sans-serif;color:var(--yellow);font-size:.66rem;
+    font-weight:800;letter-spacing:.26em;text-transform:uppercase;margin:0;
+  }
+  .headline{
+    font-family:Montserrat,sans-serif;font-weight:900;
+    font-size:clamp(1.5rem,4.6vw,2.4rem);line-height:1;margin:0;color:#fff;
+    text-transform:uppercase;letter-spacing:-.01em;
+  }
+  .fresh{color:var(--green);font-weight:800;font-size:clamp(.8rem,2.3vw,.95rem);margin:0}
+  .combo{
+    display:flex;align-items:center;gap:10px;background:var(--yellow);color:var(--ink);
+    border-radius:10px;padding:10px 14px;margin-top:2px;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(.92rem,2.7vw,1.08rem);
+  }
+  .combo .emo{font-size:1rem}
+  .loc{font-size:clamp(.72rem,2.1vw,.82rem);color:rgba(255,255,255,.92);margin:0}
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    background:var(--yellow);color:var(--ink);border-radius:10px;padding:11px 18px;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:.86rem;letter-spacing:.02em;
+  }
+
+  /* ---------- copy sections ---------- */
+  .copy{display:grid;gap:26px;margin-top:44px}
+  @media(min-width:900px){.copy{grid-template-columns:1fr 1fr}}
+  .copy h4{
+    font-family:Montserrat,sans-serif;font-size:.76rem;font-weight:800;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--yellow);margin:0 0 14px;
+  }
+  pre{
+    background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;font-family:Manrope,sans-serif;font-size:.95rem;
+    color:#fff;line-height:1.65;margin:0;white-space:pre-wrap;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:.86rem;padding:7px 12px;border-radius:999px;font-family:Montserrat,sans-serif;font-weight:600}
+  .dm-pitch{grid-column:1 / -1;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .dm-pitch h4{color:var(--red);color:var(--yellow)}
+  .dm-pitch pre{background:rgba(0,0,0,.25)}
+  .img-credit{color:var(--muted);font-size:.78rem;margin:10px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Demo Post · Client Pitch</p>
+    <h1>ChikChik — <span class="accent">Playful Chicken Fingers Post</span> 🍗</h1>
+    <p class="sub">Oder meme-forward, budget-snack energy match koray banao — chicken fingers photo + bold red/yellow + "Never Frozen. Always Fresh." tagline.</p>
+    <div class="brand-pill">🍗 Never Frozen. Always Fresh. · @eatchikchik</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download demo post (1080×1080 PNG)</button>
+      <p class="export-note">Demo photo placeholder — client er delivery te oder nijer chicken fingers photo use korbe.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide" id="slide">
+      <div class="pic-zone">
+        <img id="pic" crossorigin="anonymous"
+             src="https://images.unsplash.com/photo-1562967914-608f82629710?w=1080&q=80"
+             alt="Chicken fingers">
+        <span class="flag">🔥 First Chicken Finger Restaurant 🇧🇩</span>
+        <span class="handle">@eatchikchik</span>
+      </div>
+      <div class="panel">
+        <p class="eyebrow-post">Newest Snack Spot</p>
+        <h2 class="headline">Crispy Chicken Fingers</h2>
+        <p class="fresh">✓ Never Frozen. Always Fresh.</p>
+        <div class="combo"><span class="emo">🍗</span> Four Finger Combo — budget-friendly done right</div>
+        <p class="loc">📍 Uttara, Sector 13 — Garib-E-Nawaz Ave, House 42</p>
+        <span class="cta">Order on Foodpanda 📲</span>
+      </div>
+    </div>
+    <p class="img-credit">Demo photo: Unsplash · Project e oder nijer chicken fingers photo use korbe</p>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>🍗 HUNGER DETECTED. SOLUTION READY.
+
+Crispy outside, juicy inside — our chicken
+fingers are NEVER FROZEN, ALWAYS FRESH. 🇧🇩
+
+🔥 First chicken finger restaurant in BD
+😋 Budget snack done right
+
+📍 Uttara, Sector 13
+Garib-E-Nawaz Avenue, House 42
+
+📲 Order via Foodpanda now!
+
+Never Frozen. Always Fresh.</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#ChikChik</span><span class="tag">#ChickenFingers</span>
+        <span class="tag">#ChickenFingerBD</span><span class="tag">#Uttara</span>
+        <span class="tag">#UttaraFood</span><span class="tag">#DhakaFood</span>
+        <span class="tag">#FastFoodBD</span><span class="tag">#NeverFrozenAlwaysFresh</span>
+        <span class="tag">#BudgetFood</span><span class="tag">#Foodpanda</span>
+        <span class="tag">#FriedChicken</span><span class="tag">#BangladeshFood</span>
+      </div>
+    </div>
+    <div class="dm-pitch">
+      <h4>📩 DM Pitch Message — @eatchikchik ke pathaite</h4>
+      <pre>Assalamualaikum @eatchikchik team! 👋
+
+Apnar brand amader onek pasand! Chunger finger
+concept + "Never Frozen. Always Fresh." — jhakas! 🍗
+
+Ami Sahadat — content creator. Apnar brand er
+jonno ekta DEMO post ready koreche, kono obligation
+nai. 🙌
+
+[Export kora PNG ta attach korun]
+
+Bhalo lagte pare — monthly plan er kotha boli:
+post designs, reels scripts, playful memes, captions,
+hashtags — sob ready kore dibo! 💪
+
+Ki mone hoy? 🙌</pre>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn=document.getElementById('exportBtn');
+    if(!btn||typeof html2canvas==='undefined')return;
+    function imgReady(){
+      var img=document.getElementById('pic');
+      return img.complete?Promise.resolve():Promise.resolve(img.decode().then(function(){},function(){}));
+    }
+    btn.addEventListener('click',function(){
+      var el=document.getElementById('slide');
+      btn.disabled=true;btn.textContent='Exporting…';
+      imgReady().then(function(){
+        var scale=1080/el.clientWidth;
+        return html2canvas(el,{scale:scale,useCORS:true});
+      }).then(function(canvas){
+        var a=document.createElement('a');
+        a.href=canvas.toDataURL('image/png');
+        a.download='demo-chikchik-crispy-fingers.png';
+        document.body.appendChild(a);a.click();a.remove();
+        btn.disabled=false;btn.textContent='⬇️ Download demo post (1080×1080 PNG)';
+      });
+    });
+  })();
+</script>
+</body>
+</html>

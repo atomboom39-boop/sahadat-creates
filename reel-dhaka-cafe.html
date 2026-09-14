@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dhaka Cafe Reel</title>
+<style>
+  :root{
+    --bg:#0E0C0A;
+    --cream:#FAF1E3;
+    --tomato:#E14B32;
+    --cheese:#F2B33D;
+    --white:#FFFFFF;
+    --ink:#241B14;
+    --muted:#B9B9C6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--bg);color:#fff;font-family:Manrope,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+
+  /* ---------- the reel ---------- */
+  .reel-wrap{height:100vh;display:flex;align-items:center;justify-content:center;padding:12px}
+  .reel{
+    position:relative;height:100%;max-height:100vh;aspect-ratio:9/16;max-width:100vw;
+    overflow:hidden;background:var(--ink);border-radius:22px;
+    box-shadow:0 30px 80px rgba(0,0,0,.55);
+  }
+  .scene{
+    position:absolute;inset:0;opacity:0;
+    animation:fade 4s infinite;
+  }
+  .scene .bg{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    animation:kb 4s infinite;
+    background:linear-gradient(135deg,#3a2417,#1f1510);
+  }
+  .scene .shade{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(18,12,8,.88) 0%,rgba(18,12,8,.25) 40%,rgba(18,12,8,0) 60%);
+  }
+  .scene .skin{position:absolute;inset:0;display:flex;flex-direction:column}
+
+  /* scene 1..5 delays */
+  .scene:nth-child(1){animation-delay:0s}
+  .scene:nth-child(2){animation-delay:-4s}
+  .scene:nth-child(3){animation-delay:-8s}
+  .scene:nth-child(4){animation-delay:-12s}
+  .scene:nth-child(5){animation-delay:-16s}
+  .scene:nth-child(1) .bg{animation-delay:0s}
+  .scene:nth-child(2) .bg{animation-delay:-4s}
+  .scene:nth-child(3) .bg{animation-delay:-8s}
+  .scene:nth-child(4) .bg{animation-delay:-12s}
+  .scene:nth-child(5) .bg{animation-delay:-16s}
+
+  @keyframes fade{
+    0%{opacity:0} 4%{opacity:1} 56%{opacity:1} 70%{opacity:0} 100%{opacity:0}
+  }
+  @keyframes kb{
+    0%{transform:scale(1.16)} 60%{transform:scale(1.03)} 100%{transform:scale(1.16)}
+  }
+
+  /* persistent chrome */
+  .chrome{
+    position:absolute;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;font-family:Montserrat,sans-serif;
+    font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .chrome span{background:rgba(18,12,8,.62);border-radius:999px;padding:7px 12px}
+  .chrome .tag{color:var(--cheese)}
+  .chrome .hdl{color:#fff}
+  .progress{
+    position:absolute;bottom:0;left:0;width:100%;height:5px;z-index:20;
+    background:rgba(255,255,255,.15);
+  }
+  .progress::after{
+    content:"";display:block;height:100%;width:25%;
+    background:var(--tomato);animation:adv 20s linear infinite;
+  }
+  @keyframes adv{0%{margin-left:0}100%{margin-left:100%}}
+
+  /* scene content */
+  .center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 26px}
+  .bottom-left{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:26px}
+  .eyebrow{
+    font-family:Montserrat,sans-serif;color:var(--cheese);font-size:.7rem;
+    font-weight:800;letter-spacing:.3em;text-transform:uppercase;
+  }
+  .serif{
+    font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;
+    font-size:clamp(2rem,9vh,2.9rem);line-height:1;color:#fff;
+    text-shadow:0 3px 18px rgba(0,0,0,.5);text-wrap:balance;
+  }
+  .sub{color:rgba(255,255,255,.9);font-size:clamp(.95rem,3.4vh,1.1rem);font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  .kicker{color:var(--cheese);font-size:clamp(.8rem,2.8vh,.95rem);font-weight:800;margin-top:6px}
+  .price{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;color:var(--cheese);font-size:clamp(1.6rem,6vh,2.4rem);margin-top:2px}
+  .loc{color:rgba(255,255,255,.85);font-size:clamp(.75rem,2.6vh,.9rem);margin-top:10px}
+
+  /* solid gradient scenes */
+  .scene.solid{background:linear-gradient(160deg,#B2241A 0%,#D64529 55%,#E14B32 100%)}
+  .scene.solid2{background:linear-gradient(160deg,#1A1410 0%,#2A1D14 100%)}
+  .scene .center-grad{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 26px}
+  .combo{
+    display:inline-flex;align-items:center;background:var(--cheese);color:var(--ink);
+    border-radius:12px;padding:12px 16px;font-family:Montserrat,sans-serif;
+    font-weight:900;font-size:clamp(.9rem,3vh,1.1rem);margin-top:12px;
+  }
+  .cta{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    background:var(--cheese);color:var(--ink);border-radius:12px;padding:14px 20px;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(-rem,.95rem,1.05rem);
+    animation:pulse 2s infinite;
+  }
+  .big-cta{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;font-size:clamp(1.8rem,7vh,2.6rem);color:#fff;margin-top:14px}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+  /* ---------- guide section ---------- */
+  .guide{max-width:640px;margin:0 auto;padding:56px 24px 90px}
+  .guide h2{font-family:Montserrat,sans-serif;font-size:1.3rem;font-weight:900;margin-bottom:6px}
+  .guide .hint{color:var(--muted);font-size:.9rem;margin-bottom:26px}
+  .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+  .card h3{font-family:Montserrat,sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--cheese);margin:0 0 12px}
+  .card ol,.card ul{margin:0;padding-left:20px;color:#fff;line-height:1.8;font-size:.93rem}
+  .card li b{color:var(--cheese)}
+  .card p{color:var(--muted);font-size:.88rem;line-height:1.7;margin:0}
+  pre.g{color:#fff;font-family:Manrope,sans-serif;font-size:.9rem;line-height:1.7;white-space:pre-wrap;margin:0}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .tag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:.85rem;padding:6px 12px;border-radius:999px;font-family:Montserrat,sans-serif;font-weight:600}
+  .img-note{color:var(--muted);font-size:.8rem;margin-top:6px}
+</style>
+</head>
+<body>
+
+  <div class="reel-wrap">
+    <div class="reel">
+      <!-- PERSISTENT -->
+      <div class="chrome">
+        <span class="tag">🍕 Good Food. Good Mood.</span>
+        <span class="hdl">@dhaka.cafe</span>
+      </div>
+
+      <!-- SCENE 1: pizza headline -->
+      <div class="scene">
+        <img class="bg" crossorigin="anonymous" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80" alt="">
+        <div class="shade"></div>
+        <div class="skin"><div class="center" style="align-items:flex-start">
+          <p class="eyebrow">Special Combo</p>
+          <p class="serif" style="margin-top:12px">Pizza Night</p>
+          <p class="sub" style="margin-top:6px">Golden crust. Loads of cheese. Every day.</p>
+        </div></div>
+      </div>
+
+      <!-- SCENE 2: cheese pull -->
+      <div class="scene">
+        <img class="bg" crossorigin="anonymous" src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80" alt="">
+        <div class="shade"></div>
+        <div class="skin"><div class="bottom-left">
+          <p class="eyebrow">Crispy &amp; Cheesy</p>
+          <p class="serif" style="margin-top:10px">Fresh out of the oven 😋</p>
+        </div></div>
+      </div>
+
+      <!-- SCENE 3: pasta -->
+      <div class="scene">
+        <img class="bg" crossorigin="anonymous" src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&q=80" alt="">
+        <div class="shade"></div>
+        <div class="skin"><div class="bottom-left">
+          <p class="eyebrow">Comfort Food</p>
+          <p class="serif" style="margin-top:10px">Handmade fresh pasta</p>
+          <p class="sub" style="margin-top:6px">Delicious, daiy, deshi style.</p>
+        </div></div>
+      </div>
+
+      <!-- SCENE 4: combo offer -->
+      <div class="scene solid">
+        <div class="skin"><div class="center-grad">
+          <p class="eyebrow">Special Combo</p>
+          <p class="serif" style="margin-top:12px">1 Medium Pizza<br>+ 1 Soft Drink</p>
+          <p class="price">= 599৳</p>
+          <div class="combo">🍕 Hot &amp; fresh, ready in minutes</div>
+          <p class="loc" style="margin-top:12px">📍 Mirpur-10, DESCO er pichoner road, Lane-18, Block-C</p>
+        </div></div>
+      </div>
+
+      <!-- SCENE 5: CTA -->
+      <div class="scene solid2">
+        <div class="skin"><div class="center-grad">
+          <p class="eyebrow">Order Now</p>
+          <p class="big-cta">Hungry?</p>
+          <span class="cta">📩 DM “PIZZA” to order</span>
+          <p class="loc" style="margin-top:10px">Or order on Foodpanda</p>
+        </div></div>
+      </div>
+
+      <div class="progress"></div>
+    </div>
+  </div>
+
+  <div class="guide">
+    <h2>🎬 Kivabe MP4 Projir Banabi</h2>
+    <p class="hint">Reel ta auto-loop hoy (20 sec) — uporer preview ta record korlei hoy!</p>
+
+    <div class="card">
+      <h3>Step 1 — Screen Record (Windows)</h3>
+      <ol>
+        <li>Browser e <b>D:\my projeckt\reel-dhaka-cafe.html</b> open kor</li>
+        <li><b>F11</b> chap (fullscreen — shudhu reel)</li>
+        <li><b>Win + Alt + R</b> chap (record start)</li>
+        <li>20 sec await — ar <b>Win + Alt + R</b> abar (stop)</li>
+        <li>Pawa jabe: <b>C:\Users\...\Videos\Captures</b></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Step 1 (Phone)</h3>
+      <ol>
+        <li>Phone e file open kor (or PC theke browser)</li>
+        <li>Phone er built-in <b>screen recorder</b> on kor</li>
+        <li>Reel ta record + stop kore watch — MP4 ready</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Step 2 — CapCut E Song Add (free)</h3>
+      <ol>
+        <li>CapCut → new project → recorded video import</li>
+        <li><b>Audio → Music → Trending</b> → beat/mood match koro</li>
+        <li>Song er catch jekhane video e highlight ashe — check placas</li>
+        <li>Text/style e 1 ta caption ja neho + export 1080×1920</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Song Suggestions (CapCut Trending)</h3>
+      <p>Khuji: “aesthetic food” / “tiktok food beat” / “pizza banger” category — cheerful, energetic beat puro reel e mismatch hoia.</p>
+    </div>
+
+    <div class="card">
+      <h3>Caption (Reel er jonno)</h3>
+      <pre class="g">🍕 PIZZA NIGHT is here!
+
+Golden crust, loads of cheese —
+fresh out of our oven. 😋
+
+🔥 1 Medium Pizza + 1 Soft Drink = 599৳
+📍 Mirpur-10, DESCO pichoner road, Lane-18
+
+📩 DM "PIZZA" to order
+
+Good Food. Good Mood. Every Day.</pre>
+      <div class="tags">
+        <span class="tag">#DhakaCafe</span><span class="tag">#PizzaDhaka</span>
+        <span class="tag">#Mirpur10</span><span class="tag">#DhakaFood</span>
+        <span class="tag">#FoodReels</span><span class="tag">#ReelsBangladesh</span>
+        <span class="tag">#PizzaLover</span><span class="tag">#CheesePizza</span>
+        <span class="tag">#MirpurCafe</span><span class="tag">#GoodFoodGoodMood</span>
+      </div>
+      <p class="img-note">Hashtags first comment e dite hobe — caption cleaner thakbe.</p>
+    </div>
+
+    <div class="card">
+      <h3>📩 DM Pitch (client ke)</h3>
+      <pre class="g">Assalamualaikum @dhaka.cafe team! 👋
+
+Ami Sahadat — content creator. Apnar brand er
+jonno ekta 20-second reel demo banao — video ta
+ekhane dekhun:
+
+[recorded MP4 attach korun]
+
+Pure food vibe — photo close-ups + combo offer
++ "DM PIZZA" CTA. Monthly content plan e ei
+type reels weekly deya jabe! 💪
+
+Ki mone hoy? 🙌</pre>
+    </div>
+  </div>
+
+</body>
+</html>

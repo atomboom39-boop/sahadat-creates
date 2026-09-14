@@ -1,0 +1,9 @@
+# exclude heavy / unrelated
+future-me/
+node_modules/
+__pycache__/
+.claude/
+*.py
+_check.js
+.DS_Store
+Thumbs.db

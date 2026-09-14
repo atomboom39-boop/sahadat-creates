@@ -1,0 +1,160 @@
+<title>30 Day Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<div class="page">
+
+  <div class="hdr">
+    <p class="hdr-eyebrow">Sahadat Creates · Content Strategy</p>
+    <h1>30 Day <span class="accent">Action Plan</span></h1>
+    <p>Instagram Content Service — start to first paid client in 30 days.</p>
+    <div class="stats">
+      <div class="stat"><b>2-4</b><span>clients target</span></div>
+      <div class="stat"><b>5K–15K</b><span>BDT income</span></div>
+      <div class="stat"><b>2-3</b><span>reviews collected</span></div>
+    </div>
+    <div class="print-row">
+      <button class="print-btn" onclick="window.print()">🖨️ Print checklist</button>
+      <span class="save-note">Phone e save: ⋯ menu → "Share" → "Print"</span>
+    </div>
+  </div>
+
+  <div id="plan"></div>
+
+  <footer>
+    <b>Rule 1:</b> Daily DM minimum 5 ta &nbsp;|&nbsp;
+    <b>Rule 2:</b> Deadline NEVER miss &nbsp;|&nbsp;
+    <b>Rule 3:</b> Jay + value always barao<br>
+    <b>© Sahadat Creates</b> · Generated for first 30-day launch plan
+  </footer>
+
+</div>
+
+<script>
+var plan=[
+  {id:1,title:"Foundation — Account & Portfolio",color:"d1",tasks:[
+    "☐ Profile picture set kor (logo)",
+    "☐ Bio paste kor (ready ache)",
+    "☐ Professional account ON",
+    "☐ Contact email add kor",
+    "☐ Post 1 (Intro) upload + caption",
+    "☐ Post 2 (Carousel) upload + caption",
+    "☐ Post 3 (Before/After) upload + caption",
+    "☐ Sab post e hashtags comment e",
+    "☐ First 3 post pin kora (profile top)",
+    "☐ Highlights bana: Portfolio / Services / Reviews",
+    "☐ WhatsApp link add (wa.me/880...)",
+    "☐ Profile preview check — premium? yes ✓"
+  ],aim:"Goal: Fully complete professional profile + 3 portfolio posts live"},
+  {id:2,title:"Client Research & Outreach Start",color:"d2",tasks:[
+    "☐ Instagram search: dhaka restaurant / bd boutique / beauty",
+    "☐ 10 ta target page list koro (2K–50K follower)",
+    "☐ Sob 10 ta page follow kor",
+    "☐ 5 ta page e DM 1 pathao (first intro message)",
+    "☐ Follow-up DM 2 pathao (3 din por reply na asle)",
+    "☐ 2 ta new sample post ready rakho (client der dekhabar jonno)",
+    "☐ DM 3 follow-up pathao (3-4 din por)",
+    "☐ Reply check + Interested client note koro",
+    "☐ DM pathate kono pujhu paoa? resolve koro",
+    "☐ Aro 5 ta new page find + follow + DM",
+    "☐ Subscription number track koro",
+    "☐ Week review: koto reply? koto interested?"
+  ],aim:"Goal: 3-5 replies paoa, 1-2 interested client identify kora"},
+  {id:3,title:"Close First Client + Deliver",color:"d3",tasks:[
+    "☐ Interested client ke offer koro: free trial 1 week",
+    "☐ 2 ta post + 1 reel script ready kor (trial)",
+    "☐ Trial deliver kor (24h deadline)",
+    "☐ Feedback message pathao",
+    "☐ Happy hole — monthly plan propose kor",
+    "☐ Rate card show kor (2,500 / 5,000 / 8,000)",
+    "☐ Payment receive kor (advance 50%)",
+    "☐ First paid client er full content banano shuru",
+    "☐ Deliver paid content on time",
+    "☐ Aro 5 ta new client DM",
+    "☐ Referral ask kor happy client ke",
+    "☐ Week review: koto income? koto clients?"
+  ],aim:"Goal: 1 paid client secured, content deliver, referral ask done"},
+  {id:4,title:"Scale + Reviews + Grow",color:"d4",tasks:[
+    "☐ Client 2 close koro (similar process)",
+    "☐ 2nd client payment receive",
+    "☐ All content deliver on time",
+    "☐ Screenshot testimonials jama koro",
+    "☐ Reviews highlight e add koro",
+    "☐ Aro 10 ta new client find + DM",
+    "☐ Content batch day: 2-3 client er full month plan banay rakh",
+    "☐ Contract extension er kotha koro",
+    "☐ Rate ekto beshi baro (experience ache ebar)",
+    "☐ Ei month income hishab kor",
+    "☐ Next month plan banao",
+    "☐ 🎉 30 DAY COMPLETE!"
+  ],aim:"Goal: 2-4 clients, 5K-15K income, reviews collected"}
+];
+
+function render(){
+  var c=document.getElementById("plan");
+  var html="";
+  plan.forEach(function(w,i){
+    var idx=i;
+    html+='<div class="week">';
+    html+='<div class="week-hdr">';
+    html+='<span class="week-badge w'+(idx+1)+'">Week '+(idx+1)+'</span>';
+    html+='<span class="week-title">'+w.title+'</span>';
+    html+='</div>';
+    html+='<div class="day-aim">'+w.aim+'</div>';
+    w.tasks.forEach(function(t,ti){
+      var dn=i*7+ti+1;
+      html+='<div class="day">';
+      html+='<div class="day-top" onclick="toggle('+idx+','+ti+')">';
+      html+='<span class="day-num d'+(idx+1)+'">'+dn+'</span>';
+      html+='<span class="day-title">'+t.substring(3)+'</span>';
+      html+='<span class="arrow" id="arr'+idx+'_'+ti+'">›</span>';
+      html+='</div>';
+      html+='<div class="day-body" id="body'+idx+'_'+ti+'">';
+      html+='<ul><li><span class="ck" id="ck'+idx+'_'+ti+'" onclick="check(event,'+idx+','+ti+')"></span><span class="li" id="lb'+idx+'_'+ti+'">'+t+'</span></li></ul>';
+      html+='</div></div>';
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+  loadSaved();
+}
+
+function toggle(w,t){
+  var b=document.getElementById("body"+w+"_"+t);
+  var a=document.getElementById("arr"+w+"_"+t);
+  var show=b.classList.contains("open");
+  b.classList.toggle("open");
+  a.classList.toggle("open");
+}
+
+function check(ev,w,t){
+  ev.stopPropagation();
+  var ck=document.getElementById("ck"+w+"_"+t);
+  var lb=document.getElementById("lb"+w+"_"+t);
+  var done=ck.classList.toggle("done");
+  lb.classList.toggle("done",done);
+  save();
+}
+
+function save(){
+  var d={};
+  for(var w=0;w<4;w++){
+    for(var t=0;t<(plan[w]?plan[w].tasks.length:0);t++){
+      var ck=document.getElementById("ck"+w+"_"+t);
+      if(ck&&ck.classList.contains("done")) d[w+"_"+t]=true;
+    }
+  }
+  try{localStorage.setItem("plan30",JSON.stringify(d))}catch(e){}
+}
+
+function loadSaved(){
+  try{var d=JSON.parse(localStorage.getItem("plan30")||"{}")}catch(e){d={}}
+  Object.keys(d).forEach(function(k){
+    var parts=k.split("_");
+    var w=+parts[0],t=+parts[1];
+    var ck=document.getElementById("ck"+w+"_"+t);
+    var lb=document.getElementById("lb"+w+"_"+t);
+    if(ck){ck.classList.add("done");lb.classList.add("done")}
+  });
+}
+
+render();
+</script>

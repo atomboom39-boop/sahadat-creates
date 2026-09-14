@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before After Post</title>
+<style>
+  :root{
+    --navy:#1A1A2E; --navy-2:#21213B; --navy-3:#2A2A4A;
+    --coral:#E94560; --gold:#F5A623; --white:#FFFFFF;
+    --muted:#B9B9D1; --gray:#8B8B9E; --line:rgba(255,255,255,.09);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--navy);color:var(--white);
+    font-family:Manrope, -apple-system, "Segoe UI", sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 72px}
+
+  .eyebrow{
+    font-family:Montserrat,sans-serif;font-size:.78rem;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin:0 0 14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--coral)}
+  header h1{
+    font-family:Montserrat,sans-serif;font-size:clamp(1.8rem,4.5vw,2.6rem);
+    font-weight:900;line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em;
+  }
+  header h1 .accent{color:var(--coral)}
+  header p.sub{color:var(--muted);max-width:56ch;margin:14px 0 0;font-size:1.02rem}
+
+  .brand-pill{
+    display:inline-flex;align-items:center;gap:10px;margin:24px 0 0;
+    background:var(--navy-2);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;font-family:Montserrat,sans-serif;
+    font-weight:700;font-size:.86rem;letter-spacing:.04em;
+  }
+  .mark{
+    width:26px;height:26px;border-radius:50%;background:var(--coral);color:var(--navy);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:1rem;border:2px solid var(--gold);
+  }
+  .export-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:22px}
+  #exportBtn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--coral);color:var(--navy);border:none;cursor:pointer;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:.95rem;
+    letter-spacing:.02em;padding:13px 20px;border-radius:12px;
+    transition:transform .15s ease,filter .15s ease;
+  }
+  #exportBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  #exportBtn:disabled{cursor:wait;filter:brightness(.8)}
+  #exportBtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .export-note{color:var(--muted);font-size:.85rem;max-width:46ch;margin:0}
+
+  /* ---------- the single slide ---------- */
+  .frame{margin-top:36px;max-width:560px;background:var(--navy);border-radius:var(--radius);border:1px solid var(--line);overflow:hidden}
+  .slide{position:relative;aspect-ratio:1/1;width:100%;display:flex;flex-direction:column;padding:clamp(18px,4vw,28px);overflow:hidden;background:var(--navy)}
+  .slide > *{position:relative}
+  .slide-top{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:Montserrat,sans-serif;font-size:.72rem;font-weight:700;
+    letter-spacing:.18em;color:var(--muted);text-transform:uppercase;
+  }
+  .slide-top .co{display:inline-flex;align-items:center;gap:9px;color:var(--white)}
+  .slide-top .co span{letter-spacing:.22em}
+
+  .split{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+  .half{border-radius:14px;padding:16px 14px;display:flex;flex-direction:column;justify-content:center;gap:11px;overflow:hidden}
+  .half .lbl{font-family:Montserrat,sans-serif;font-weight:900;letter-spacing:.16em;font-size:.86rem;display:flex;align-items:center;gap:7px}
+  .half .line{width:28px;height:3px;border-radius:2px}
+  .half ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .half li{font-size:clamp(.72rem,2vw,.88rem);font-weight:600;line-height:1.35;display:flex;gap:8px;align-items:flex-start}
+  .x{color:#FF6B6B;flex:none}
+  .v{color:#4CD97B;flex:none;font-weight:900}
+
+  /* before side */
+  .before{background:#3A3A4E}
+  .before .lbl{color:#C4C4D6}
+  .before .line{background:#C4C4D6}
+  .before ul li{color:#A8A8BA}
+
+  /* after side */
+  .after{background:var(--navy-2);border:1px solid rgba(233,69,96,.28)}
+  .after .lbl{color:var(--white)}
+  .after .lbl .ok{color:var(--gold)}
+  .after .line{background:var(--coral)}
+  .after ul li{color:var(--white)}
+  .after .gld{color:var(--gold);font-weight:800}
+
+  .cta{
+    text-align:center;background:var(--navy-2);border:1px solid var(--line);
+    border-radius:14px;padding:12px 10px;
+    font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:.02em;
+    font-size:clamp(.82rem,2.4vw,1rem);color:var(--white);
+  }
+  .cta .dm{color:var(--coral)}
+
+  .slide-bot{
+    display:flex;align-items:center;justify-content:space-between;
+    font-family:Montserrat,sans-serif;font-size:.76rem;font-weight:600;
+    letter-spacing:.14em;color:var(--muted);text-transform:uppercase;
+    padding-top:14px;border-top:1px solid var(--line);
+  }
+
+  /* ---------- copy sections ---------- */
+  .copy{display:grid;gap:26px;margin-top:44px}
+  @media(min-width:820px){.copy{grid-template-columns:1fr 1fr}}
+  .copy h4{
+    font-family:Montserrat,sans-serif;font-size:.78rem;font-weight:800;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 14px;
+  }
+  pre{
+    background:var(--navy-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;font-family:Manrope,sans-serif;font-size:.95rem;
+    color:var(--white);line-height:1.65;margin:0;white-space:pre-wrap;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    background:var(--navy-3);border:1px solid var(--line);color:var(--muted);
+    font-size:.86rem;padding:7px 12px;border-radius:999px;
+    font-family:Montserrat,sans-serif;font-weight:600;
+  }
+  @media (prefers-reduced-motion: reduce){#exportBtn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Portfolio · Post 3</p>
+    <h1>Before <span class="accent">vs</span> After — Skill Showcase</h1>
+    <p class="sub">Ekta single Instagram post — left side beshi professional, right side premium. Click kore export korle direct 1080×1080 PNG pabe.</p>
+    <div class="brand-pill"><span class="mark">S</span> @sahadat.creates</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download slide (1080×1080 PNG)</button>
+      <p class="export-note">Ei post ta single image — export kore direct upload korte parbi.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide">
+      <div class="slide-top">
+        <span class="co"><span class="mark" style="width:20px;height:20px;font-size:.78rem">S</span><span>SAHADAT CREATES</span></span>
+        <span class="num" style="font-variant-numeric:tabular-nums">POST 03</span>
+      </div>
+
+      <div class="split">
+        <div class="half before">
+          <span class="lbl">BEFORE <span class="x">✕</span></span>
+          <span class="line"></span>
+          <ul>
+            <li><span class="x">✕</span>No strategy</li>
+            <li><span class="x">✕</span>Plain design</li>
+            <li><span class="x">✕</span>No hashtags</li>
+            <li><span class="x">✕</span>No call-to-action</li>
+          </ul>
+        </div>
+        <div class="half after">
+          <span class="lbl">AFTER <span class="ok">✓</span></span>
+          <span class="line"></span>
+          <ul>
+            <li><span class="v">✓</span>Clear <span class="gld">strategy</span></li>
+            <li><span class="v">✓</span>Professional design</li>
+            <li><span class="v">✓</span>Smart hashtags</li>
+            <li><span class="v">✓</span>Strong CTA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta">Want this for <span class="gld">YOUR</span> brand? <span class="dm">DM "READY"</span></div>
+
+      <div class="slide-bot"><span>@sahadat.creates</span><span>📩 FREE sample</span></div>
+    </div>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>Left 👈 = Posting without strategy
+Right 👉 = Content with PROFESSIONAL touch
+
+The difference? Strategy + Design + Right
+Captions + Hashtags 🎯
+
+This is what I do for brands every day 💪
+
+Difference dekhle ki mone hoy?
+Comment koro! 💬
+
+DM "READY" for your brand's
+FREE sample post! 🚀</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#ContentBeforeAndAfter</span><span class="tag">#ContentCreator</span>
+        <span class="tag">#InstagramDesign</span><span class="tag">#ProfessionalContent</span>
+        <span class="tag">#GrowOnInstagram</span><span class="tag">#BDContent</span>
+        <span class="tag">#SocialMediaMarketing</span><span class="tag">#SahadatCreates</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn = document.getElementById('exportBtn');
+    if(!btn || typeof html2canvas === 'undefined') return;
+    btn.addEventListener('click', function(){
+      var el = document.querySelector('.slide');
+      btn.disabled = true; btn.textContent = 'Exporting…';
+      var scale = 1080 / el.clientWidth;
+      html2canvas(el, {scale: scale, backgroundColor: '#1A1A2E', useCORS: true})
+        .then(function(canvas){
+          var a = document.createElement('a');
+          a.href = canvas.toDataURL('image/png');
+          a.download = 'post3-before-after.png';
+          document.body.appendChild(a); a.click(); a.remove();
+          btn.disabled = false; btn.textContent = '⬇️ Download slide (1080×1080 PNG)';
+        });
+    });
+  })();
+</script>
+</body>
+</html>

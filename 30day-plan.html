@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30 Day Plan</title>
+<style>
+  :root{
+    --navy:#1A1A2E;--navy-2:#21213B;--navy-3:#2A2A4A;
+    --coral:#E94560;--gold:#F5A623;--white:#FFFFFF;
+    --muted:#B9B9D1;--line:rgba(255,255,255,.1);
+    --card:#FFFFFF;--text:#1F1F2E;--light-muted:#6B7280;--border:#E5E7EB;
+    --week1:#E94560;--week2:#F5A623;--week3:#4CD97B;--week4:#5C7CFA;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Manrope,-apple-system,"Segoe UI",sans-serif;
+    color:var(--text);line-height:1.6;
+    background:var(--white);-webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+
+  /* header */
+  .hdr{
+    background:var(--navy);color:var(--white);border-radius:18px;
+    padding:28px 28px 24px;margin-bottom:32px;
+  }
+  .hdr-eyebrow{
+    font-family:Montserrat,sans-serif;font-size:.72rem;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:10px;margin:0 0 10px;
+  }
+  .hdr-eyebrow::before{content:"";width:28px;height:2px;background:var(--coral)}
+  .hdr h1{
+    font-family:Montserrat,sans-serif;font-size:1.8rem;font-weight:900;
+    line-height:1.1;margin:0;
+  }
+  .hdr h1 .accent{color:var(--coral)}
+  .hdr p{color:var(--muted);margin:8px 0 0;font-size:.92rem}
+
+  .stats{
+    display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;
+  }
+  .stat{
+    background:var(--navy-2);border:1px solid var(--line);border-radius:10px;
+    padding:10px 16px;font-size:.86rem;
+  }
+  .stat b{color:var(--white);font-family:Montserrat,sans-serif;font-weight:900;font-size:1.1rem;display:block;line-height:1.2}
+  .stat span{color:var(--muted);font-size:.78rem}
+
+  /* print button */
+  .print-row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+  .print-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--coral);color:var(--white);border:none;cursor:pointer;
+    font-family:Montserrat,sans-serif;font-weight:800;font-size:.9rem;
+    padding:11px 18px;border-radius:10px;transition:transform .12s ease;
+  }
+  .print-btn:hover{transform:translateY(-1px)}
+  .print-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .save-note{font-size:.84rem;color:var(--muted)}
+
+  /* week block */
+  .week{margin-bottom:28px}
+  .week-hdr{
+    display:flex;align-items:center;gap:12px;margin-bottom:10px;
+    padding-bottom:8px;border-bottom:2px solid var(--border);
+  }
+  .week-badge{
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:.82rem;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--white);
+    padding:5px 14px;border-radius:8px;
+  }
+  .w1{background:var(--week1)}
+  .w2{background:var(--week2)}
+  .w3{background:var(--week3)}
+  .w4{background:var(--week4)}
+  .week-title{font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;color:var(--text)}
+
+  /* day card */
+  .day{
+    border:1px solid var(--border);border-radius:12px;
+    margin-bottom:8px;overflow:hidden;
+  }
+  .day-top{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 14px;background:#F9FAFB;cursor:pointer;
+    user-select:none;
+  }
+  .day-top:hover{background:#F3F4F6}
+  .day-num{
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:.86rem;
+    color:var(--white);width:34px;height:34px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .d1{background:var(--week1)} .d2{background:var(--week2)}
+  .d3{background:var(--week3)} .d4{background:var(--week4)}
+  .day-title{font-weight:700;font-size:.92rem;flex:1}
+  .arrow{color:var(--light-muted);font-size:1.2rem;transition:transform .15s ease}
+  .arrow.open{transform:rotate(90deg)}
+  .day-body{padding:14px 14px 14px 60px;display:none}
+  .day-body.open{display:block}
+  .day-body ul{list-style:none;padding:0;margin:0}
+  .day-body li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:.88rem;padding:5px 0;border-bottom:1px solid #F3F4F6;
+  }
+  .day-body li:last-child{border-bottom:none}
+  .ck{width:18px;height:18px;border:2px solid #D1D5DB;border-radius:5px;flex-shrink:0;cursor:pointer;margin-top:2px;transition:all .12s ease}
+  .ck.done{background:var(--week1);border-color:var(--week1);position:relative}
+  .ck.done::after{content:"✓";color:var(--white);font-size:.7rem;font-weight:900;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+  .li.done-label{text-decoration:line-through;color:#9CA3AF}
+  .day-aim{margin:10px 0 0;padding:10px 12px;background:#FEF9EC;border-radius:8px;font-size:.86rem;color:#92400E;border:1px solid #FDE68A}
+
+  footer{
+    margin-top:40px;padding-top:20px;border-top:2px solid var(--border);
+    font-size:.86rem;color:var(--light-muted);text-align:center;line-height:1.7;
+  }
+  footer b{color:var(--text)}
+
+  @media print{
+    body{background:#fff}
+    .print-row{display:none}
+    .week{page-break-inside:avoid}
+    .day-body{display:none !important}
+    .ck{border:1px solid #ccc}
+    .ck.done{background:#fff}
+    .ck.done::after{content:"✓";color:var(--week1)}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <p class="hdr-eyebrow">Sahadat Creates · Content Strategy</p>
+    <h1>30 Day <span class="accent">Action Plan</span></h1>
+    <p>Instagram Content Service — start to first paid client in 30 days.</p>
+    <div class="stats">
+      <div class="stat"><b>2-4</b><span>clients target</span></div>
+      <div class="stat"><b>5K–15K</b><span>BDT income</span></div>
+      <div class="stat"><b>2-3</b><span>reviews collected</span></div>
+    </div>
+    <div class="print-row">
+      <button class="print-btn" onclick="window.print()">🖨️ Print checklist</button>
+      <span class="save-note">Phone e save: ⋯ menu → "Share" → "Print"</span>
+    </div>
+  </div>
+
+  <div id="plan"></div>
+
+  <footer>
+    <b>Rule 1:</b> Daily DM minimum 5 ta &nbsp;|&nbsp;
+    <b>Rule 2:</b> Deadline NEVER miss &nbsp;|&nbsp;
+    <b>Rule 3:</b> Jay + value always barao<br>
+    <b>© Sahadat Creates</b> · Generated for first 30-day launch plan
+  </footer>
+
+</div>
+
+<script>
+var plan=[
+  {id:1,title:"Foundation — Account & Portfolio",color:"d1",tasks:[
+    "☐ Profile picture set kor (logo)",
+    "☐ Bio paste kor (ready ache)",
+    "☐ Professional account ON",
+    "☐ Contact email add kor",
+    "☐ Post 1 (Intro) upload + caption",
+    "☐ Post 2 (Carousel) upload + caption",
+    "☐ Post 3 (Before/After) upload + caption",
+    "☐ Sab post e hashtags comment e",
+    "☐ First 3 post pin kora (profile top)",
+    "☐ Highlights bana: Portfolio / Services / Reviews",
+    "☐ WhatsApp link add (wa.me/880...)",
+    "☐ Profile preview check — premium? yes ✓"
+  ],aim:"Goal: Fully complete professional profile + 3 portfolio posts live"},
+  {id:2,title:"Client Research & Outreach Start",color:"d2",tasks:[
+    "☐ Instagram search: dhaka restaurant / bd boutique / beauty",
+    "☐ 10 ta target page list koro (2K–50K follower)",
+    "☐ Sob 10 ta page follow kor",
+    "☐ 5 ta page e DM 1 pathao (first intro message)",
+    "☐ Follow-up DM 2 pathao (3 din por reply na asle)",
+    "☐ 2 ta new sample post ready rakho (client der dekhabar jonno)",
+    "☐ DM 3 follow-up pathao (3-4 din por)",
+    "☐ Reply check + Interested client note koro",
+    "☐ DM pathate kono pujhu paoa? resolve koro",
+    "☐ Aro 5 ta new page find + follow + DM",
+    "☐ Subscription number track koro",
+    "☐ Week review: koto reply? koto interested?"
+  ],aim:"Goal: 3-5 replies paoa, 1-2 interested client identify kora"},
+  {id:3,title:"Close First Client + Deliver",color:"d3",tasks:[
+    "☐ Interested client ke offer koro: free trial 1 week",
+    "☐ 2 ta post + 1 reel script ready kor (trial)",
+    "☐ Trial deliver kor (24h deadline)",
+    "☐ Feedback message pathao",
+    "☐ Happy hole — monthly plan propose kor",
+    "☐ Rate card show kor (2,500 / 5,000 / 8,000)",
+    "☐ Payment receive kor (advance 50%)",
+    "☐ First paid client er full content banano shuru",
+    "☐ Deliver paid content on time",
+    "☐ Aro 5 ta new client DM",
+    "☐ Referral ask kor happy client ke",
+    "☐ Week review: koto income? koto clients?"
+  ],aim:"Goal: 1 paid client secured, content deliver, referral ask done"},
+  {id:4,title:"Scale + Reviews + Grow",color:"d4",tasks:[
+    "☐ Client 2 close koro (similar process)",
+    "☐ 2nd client payment receive",
+    "☐ All content deliver on time",
+    "☐ Screenshot testimonials jama koro",
+    "☐ Reviews highlight e add koro",
+    "☐ Aro 10 ta new client find + DM",
+    "☐ Content batch day: 2-3 client er full month plan banay rakh",
+    "☐ Contract extension er kotha koro",
+    "☐ Rate ekto beshi baro (experience ache ebar)",
+    "☐ Ei month income hishab kor",
+    "☐ Next month plan banao",
+    "☐ 🎉 30 DAY COMPLETE!"
+  ],aim:"Goal: 2-4 clients, 5K-15K income, reviews collected"}
+];
+
+function render(){
+  var c=document.getElementById("plan");
+  var html="";
+  plan.forEach(function(w,i){
+    var idx=i;
+    html+='<div class="week">';
+    html+='<div class="week-hdr">';
+    html+='<span class="week-badge w'+(idx+1)+'">Week '+(idx+1)+'</span>';
+    html+='<span class="week-title">'+w.title+'</span>';
+    html+='</div>';
+    html+='<div class="day-aim">'+w.aim+'</div>';
+    w.tasks.forEach(function(t,ti){
+      var dn=i*7+ti+1;
+      html+='<div class="day">';
+      html+='<div class="day-top" onclick="toggle('+idx+','+ti+')">';
+      html+='<span class="day-num d'+(idx+1)+'">'+dn+'</span>';
+      html+='<span class="day-title">'+t.substring(3)+'</span>';
+      html+='<span class="arrow" id="arr'+idx+'_'+ti+'">›</span>';
+      html+='</div>';
+      html+='<div class="day-body" id="body'+idx+'_'+ti+'">';
+      html+='<ul><li><span class="ck" id="ck'+idx+'_'+ti+'" onclick="check(event,'+idx+','+ti+')"></span><span class="li" id="lb'+idx+'_'+ti+'">'+t+'</span></li></ul>';
+      html+='</div></div>';
+    });
+    html+='</div>';
+  });
+  c.innerHTML=html;
+  loadSaved();
+}
+
+function toggle(w,t){
+  var b=document.getElementById("body"+w+"_"+t);
+  var a=document.getElementById("arr"+w+"_"+t);
+  var show=b.classList.contains("open");
+  b.classList.toggle("open");
+  a.classList.toggle("open");
+}
+
+function check(ev,w,t){
+  ev.stopPropagation();
+  var ck=document.getElementById("ck"+w+"_"+t);
+  var lb=document.getElementById("lb"+w+"_"+t);
+  var done=ck.classList.toggle("done");
+  lb.classList.toggle("done",done);
+  save();
+}
+
+function save(){
+  var d={};
+  for(var w=0;w<4;w++){
+    for(var t=0;t<(plan[w]?plan[w].tasks.length:0);t++){
+      var ck=document.getElementById("ck"+w+"_"+t);
+      if(ck&&ck.classList.contains("done")) d[w+"_"+t]=true;
+    }
+  }
+  try{localStorage.setItem("plan30",JSON.stringify(d))}catch(e){}
+}
+
+function loadSaved(){
+  try{var d=JSON.parse(localStorage.getItem("plan30")||"{}")}catch(e){d={}}
+  Object.keys(d).forEach(function(k){
+    var parts=k.split("_");
+    var w=+parts[0],t=+parts[1];
+    var ck=document.getElementById("ck"+w+"_"+t);
+    var lb=document.getElementById("lb"+w+"_"+t);
+    if(ck){ck.classList.add("done");lb.classList.add("done")}
+  });
+}
+
+render();
+</script>
+</body>
+</html>

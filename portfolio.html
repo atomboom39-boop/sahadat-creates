@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sahadat Creates</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --ink:#0D0D16; --ink-2:#131322; --panel:#1A1A2E;
+    --coral:#E94560; --gold:#F5A623; --white:#F5F5F7;
+    --muted:#9A9AB0; --line:rgba(245,245,247,.09); --green:#4CD97B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);color:var(--white);
+    font-family:Manrope,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit}
+  p{overflow-wrap:break-word}
+  .wrap{max-width:1120px;margin:0 auto;padding-inline:24px}
+  section{padding-block:84px}
+  .eyebrow{
+    font-family:Montserrat,sans-serif;font-size:.74rem;font-weight:700;
+    letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:12px;margin:0 0 16px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--coral);flex:none}
+  .sec-h{font-family:Montserrat,sans-serif;font-size:clamp(1.6rem,4vw,2.5rem);font-weight:900;letter-spacing:-.015em;line-height:1.06;text-wrap:balance}
+  .sec-h .accent{color:var(--coral)}
+  .sec-h .serif{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;color:var(--gold)}
+  .sec-sub{color:var(--muted);max-width:54ch;margin-top:12px;font-size:1rem}
+
+  .js .rv{opacity:0;transform:translateY(16px);transition:opacity .75s ease,transform .75s ease}
+  .js .rv.in{opacity:1;transform:none}
+  .td1{transition-delay:.08s}.td2{transition-delay:.16s}.td3{transition-delay:.24s}
+
+  /* inline artworks — same-origin, so the loop never breaks */
+  .art{position:absolute;inset:0;overflow:hidden}
+  .hero-bg .art svg,.cslide .bg svg,.band .bbg svg{width:100%;height:100%;display:block}
+
+  .nav{
+    position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:20px;
+    padding:14px 24px;background:rgba(13,13,22,.72);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .showcase{max-width:1120px;width:100%;margin:0 auto;display:flex;align-items:center;gap:20px}
+  .logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+  .mark{
+    width:30px;height:30px;border-radius:50%;background:var(--coral);color:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:Montserrat,sans-serif;font-weight:900;font-size:1.05rem;
+    border:2px solid var(--gold);flex:none;
+  }
+  .logo .word{font-family:Montserrat,sans-serif;font-weight:900;font-size:.95rem;letter-spacing:.08em}
+  .logo .creates{display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:.55rem;letter-spacing:.34em;color:var(--muted)}
+  .nav-links{display:flex;gap:26px;margin-left:auto}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.9rem;font-weight:600;transition:color .2s}
+  .nav-links a:hover{color:var(--white)}
+  .nav-links a:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:Montserrat,sans-serif;font-weight:800;font-size:.92rem;text-decoration:none;
+    border-radius:12px;padding:13px 21px;border:2px solid transparent;cursor:pointer;white-space:nowrap;
+    transition:transform .15s ease,filter .15s ease;
+  }
+  .btn-solid{background:var(--coral);color:#fff}
+  .btn-ghost{border-color:var(--line);color:var(--white);background:transparent}
+  .btn-sm{padding:9px 16px;font-size:.84rem}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+  .hero{position:relative;min-height:86vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:-2}
+  .hero-bg .art{animation:kb 26s ease-in-out infinite alternate}
+  @keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
+  .hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,22,.62) 0%,rgba(13,13,22,.78) 45%,rgba(13,13,22,.97) 100%)}
+  .hero .glow{position:absolute;z-index:-1;top:-22%;right:-12%;width:60%;height:80%;
+    background:radial-gradient(closest-side,rgba(233,69,96,.28),transparent 70%);filter:blur(20px);
+    animation:drift 16s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-60px,40px)}}
+  .hero .inner{max-width:1120px;margin:0 auto;padding:70px 24px}
+  .hero h1{font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(2.7rem,8vw,6rem);line-height:.98;letter-spacing:-.025em;margin:0;text-wrap:balance}
+  .rot{color:var(--coral);display:inline-block;position:relative}
+  .rot.swap{animation:swap .5s ease both}
+  @keyframes swap{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .hero .lede{color:#C9C9D6;max-width:46ch;margin:20px 0 0;font-size:1.08rem}
+  .hero .lede b{color:var(--white);font-weight:700}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .niches{margin-top:30px;display:flex;flex-wrap:wrap;gap:8px}
+  .niche{color:var(--muted);font-size:.84rem;padding:6px 13px;border:1px solid var(--line);
+    border-radius:999px;font-family:Montserrat,sans-serif;font-weight:600;background:rgba(13,13,22,.4);backdrop-filter:blur(4px)}
+  .hero .el{opacity:0;animation:fadeUp .8s ease forwards}
+  .hero .d1{animation-delay:.05s}.hero .d2{animation-delay:.16s}.hero .d3{animation-delay:.28s}.hero .d4{animation-delay:.4s}.hero .d5{animation-delay:.52s}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+  .marquee{border-block:1px solid var(--line);overflow:hidden;padding:15px 0;background:rgba(13,13,22,.6)}
+  .mq{display:flex;width:max-content;animation:marq 30s linear infinite}
+  .mq span{font-family:Montserrat,sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-inline:22px;display:inline-flex;align-items:center;gap:44px}
+  .mq span::after{content:"✦";color:var(--coral)}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  #work{padding-top:96px}
+  .cwrap{position:relative;margin-top:38px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--ink-2)}
+  .ctrack{position:relative;aspect-ratio:16/9;width:100%}
+  .cslide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility .9s}
+  .cslide.on{opacity:1;visibility:visible}
+  .cslide .bg{position:absolute;inset:0;transform:scale(1.16);transition:transform 9s linear}
+  .cslide.on .bg{transform:scale(1.02)}
+  .cslide .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,22,.18) 0%,rgba(13,13,22,.45) 45%,rgba(13,13,22,.94) 100%)}
+  .cmeta{position:absolute;left:0;right:0;bottom:0;padding:26px;display:flex;flex-direction:column;gap:7px;max-width:620px}
+  .rawkind{font-family:Montserrat,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+  .cmeta h3{font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(1.4rem,3.2vw,2.2rem);letter-spacing:-.01em;line-height:1.05}
+  .cmeta p{color:#D5D5E0;font-size:.95rem}
+  .cmeta .go{color:var(--white);font-weight:800;font-size:.88rem;margin-top:4px;display:inline-flex;align-items:center;gap:7px;width:fit-content;border-radius:8px}
+  .cmeta .go:hover{color:var(--gold)}
+  .cmeta .go:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .ccount{position:absolute;top:22px;right:24px;z-index:5;font-family:Montserrat,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.18em;
+    color:#fff;font-variant-numeric:tabular-nums;background:rgba(13,13,22,.55);border:1px solid var(--line);padding:7px 13px;border-radius:999px;backdrop-filter:blur(6px)}
+  .cbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(245,245,247,.18);z-index:5}
+  .cbar i{display:block;height:100%;width:0;background:var(--coral)}
+  .cbar.running i{animation:prog 4.6s linear forwards}
+  @keyframes prog{from{width:0}to{width:100%}}
+  .cnav{position:absolute;bottom:22px;right:24px;z-index:6;display:flex;align-items:center;gap:14px;
+    background:rgba(13,13,22,.55);border:1px solid var(--line);border-radius:999px;padding:8px 12px;backdrop-filter:blur(6px)}
+  .cbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;color:#fff;
+    font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .cbtn:hover{background:var(--coral);border-color:var(--coral);transform:scale(1.06)}
+  .cbtn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .cdots{display:flex;gap:7px}
+  .cdot{width:20px;height:4px;border-radius:99px;border:none;background:rgba(245,245,247,.28);cursor:pointer;padding:0;transition:background .25s,width .25s}
+  .cdot.on{background:var(--coral);width:34px}
+  .cdot:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .cnote{margin-top:16px;border:1px solid rgba(245,166,35,.35);background:rgba(245,166,35,.07);
+    border-radius:14px;padding:14px 18px;color:#E8E2D6;font-size:.9rem}
+  .cnote b{color:var(--gold)}
+
+  .services{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:38px}
+  .srv{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;
+    padding:26px 24px;position:relative;overflow:hidden;transition:border-color .25s,transform .25s}
+  .srv:hover{border-color:var(--coral);transform:translateY(-4px)}
+  .srv .ico{width:46px;height:46px;border-radius:13px;background:var(--panel);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:16px}
+  .srv h3{font-family:Montserrat,sans-serif;font-size:1.05rem;font-weight:800}
+  .srv p{color:var(--muted);font-size:.92rem;margin-top:7px}
+  .promise{margin-top:18px;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;
+    padding:20px 24px;color:var(--white);font-size:.94rem;display:flex;gap:14px;align-items:flex-start}
+  .promise .big{font-size:1.4rem;flex:none}
+  .promise b{color:var(--gold)}
+  .promise .bangla{color:var(--muted)}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+  .step{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative}
+  .step .num{font-family:Montserrat,sans-serif;font-weight:900;font-size:1.6rem;color:transparent;
+    -webkit-text-stroke:1.5px var(--coral);display:block;line-height:1;font-variant-numeric:tabular-nums}
+  .step h3{font-family:Montserrat,sans-serif;font-size:.98rem;font-weight:800;margin-top:14px}
+  .step p{color:var(--muted);font-size:.87rem;margin-top:6px;line-height:1.5}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px;align-items:stretch}
+  .tier{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:26px 24px;
+    display:flex;flex-direction:column;gap:10px;position:relative;transition:transform .25s,border-color .25s}
+  .tier:hover{transform:translateY(-4px)}
+  .tier.pop{border-color:var(--coral);box-shadow:0 18px 46px rgba(0,0,0,.45)}
+  .pop-pill{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    background:var(--gold);color:var(--ink);font-family:Montserrat,sans-serif;font-weight:800;
+    font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:6px 13px;border-radius:999px;white-space:nowrap}
+  .tier .name{font-family:Montserrat,sans-serif;font-weight:800;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .tier .price{font-family:Montserrat,sans-serif;font-weight:900;font-size:2.1rem;line-height:1;font-variant-numeric:tabular-nums}
+  .tier .price small{font-size:.95rem;color:var(--muted);font-family:Manrope,sans-serif;font-weight:600}
+  .tier ul{list-style:none;margin:6px 0 0;display:flex;flex-direction:column;gap:9px}
+  .tier li{display:flex;gap:9px;align-items:flex-start;font-size:.9rem}
+  .tier li .tick{color:var(--green);font-weight:900;flex:none}
+  .tier .btn{margin-top:auto;justify-content:center}
+  .price-note{color:var(--muted);font-size:.86rem;margin-top:18px}
+
+  .band{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--line);
+    padding:64px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+  .band .bbg{position:absolute;inset:0}
+  .band .bshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,22,.72),rgba(13,13,22,.92))}
+  .band > *{position:relative;z-index:1}
+  .band h2{font-family:Montserrat,sans-serif;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-.01em;text-wrap:balance}
+  .band h2 .serif{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;color:var(--gold)}
+  .band p{color:#D0D0DC;max-width:48ch}
+  .band .btnw{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+  footer{padding-block:40px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.88rem;line-height:2}
+  footer b{color:var(--white)}
+
+  @media (max-width:840px){
+    .services{grid-template-columns:1fr}
+    .steps,.tiers{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:720px){
+    section{padding-block:60px}
+    .ctrack{aspect-ratio:4/5}
+    .cnav{right:14px;bottom:48px}
+    .ccount{top:14px;right:14px}
+    .cmeta{padding:20px}
+    .hero{min-height:78vh}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .hero-bg .art{animation:none}
+    .hero .glow{animation:none}
+    .mq{animation:none}
+    .rot.swap{animation:none}
+    .cslide .bg,.cslide.on .bg{transform:none;transition:none}
+    .hero .el{animation:none;opacity:1}
+    .js .rv{opacity:1;transform:none;transition:none}
+    .cbar.running i{animation:none;width:100%}
+  }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <div class="showcase">
+      <a class="logo" href="#top"><span class="mark">S</span><span><span class="word">SAHADAT</span><span class="creates">CREATES</span></span></a>
+      <div class="nav-links"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#pricing">Pricing</a></div>
+      <a class="btn btn-solid btn-sm" href="https://wa.me/8801902960530" style="margin-left:auto">📩 DM “SAMPLE”</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <div class="hero-bg">
+      <div class="art">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="hero-bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#14142A"/><stop offset="1" stop-color="#0D0D16"/>
+            </linearGradient>
+            <linearGradient id="hero-posta" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#C32A3F"/><stop offset="1" stop-color="#8F1D2A"/>
+            </linearGradient>
+            <radialGradient id="hero-glow" cx=".78" cy=".22" r=".5">
+              <stop offset="0" stop-color="#E94560" stop-opacity=".28"/><stop offset="1" stop-color="#E94560" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="900" fill="url(#hero-bg)"/>
+          <rect width="1600" height="900" fill="url(#hero-glow)"/>
+          <text x="70" y="820" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="360" letter-spacing="8" fill="none" stroke="rgba(245,245,247,.05)" stroke-width="2">CONTENT</text>
+          <line x1="60" y1="70" x2="1540" y2="70" stroke="rgba(245,245,247,.08)" stroke-width="2"/>
+          <line x1="60" y1="830" x2="1540" y2="830" stroke="rgba(245,245,247,.08)" stroke-width="2"/>
+          <text x="120" y="170" font-size="44" fill="#F5A623">✦</text>
+          <text x="820" y="120" font-size="30" fill="#E94560">✦</text>
+          <text x="700" y="790" font-size="26" fill="#F5A623">✦</text>
+          <text x="1500" y="200" font-size="34" fill="#E94560">✦</text>
+          <circle cx="1500" cy="180" r="240" fill="none" stroke="#E94560" stroke-width="3" stroke-dasharray="12 16" opacity=".35"/>
+          <g transform="rotate(-5 1070 520)">
+            <rect x="920" y="280" width="300" height="500" rx="40" fill="#1E1E33" stroke="rgba(245,245,247,.22)" stroke-width="4"/>
+            <rect x="940" y="300" width="260" height="460" rx="26" fill="url(#hero-posta)"/>
+            <rect x="1045" y="312" width="50" height="8" rx="4" fill="rgba(255,255,255,.4)"/>
+            <text x="968" y="400" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="34" fill="#F5A623">SOLD</text>
+            <text x="968" y="446" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="34" fill="#fff">OUT</text>
+            <rect x="968" y="492" width="190" height="46" rx="23" fill="#fff"/>
+            <text x="986" y="522" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="17" fill="#1E1E33">DM NOW →</text>
+            <circle cx="1088" cy="640" r="34" fill="#F5A623"/>
+            <text x="1066" y="656" font-size="26">⚡</text>
+          </g>
+          <g transform="rotate(4 1330 500)">
+            <rect x="1180" y="330" width="300" height="480" rx="40" fill="#1E1E33" stroke="rgba(245,245,247,.22)" stroke-width="4"/>
+            <rect x="1200" y="350" width="260" height="440" rx="26" fill="#F5A623"/>
+            <text x="1232" y="430" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="34" fill="#1A1A2E">GROW</text>
+            <rect x="1232" y="462" width="160" height="12" rx="6" fill="#1A1A2E" opacity=".3"/>
+            <rect x="1232" y="486" width="120" height="12" rx="6" fill="#1A1A2E" opacity=".3"/>
+            <rect x="1232" y="520" width="196" height="60" rx="14" fill="#E94560"/>
+            <text x="1252" y="558" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="19" fill="#fff">+1,024 followers</text>
+            <rect x="1232" y="600" width="120" height="150" rx="12" fill="#1A1A2E" opacity=".85"/>
+            <rect x="1332" y="600" width="96" height="150" rx="12" fill="#E94560"/>
+            <text x="1250" y="700" font-family="Manrope,Arial,sans-serif" font-weight="700" font-size="16" fill="#F5A623">REELS</text>
+          </g>
+        </svg>
+      </div>
+      <div class="scrim"></div>
+    </div>
+    <div class="glow"></div>
+    <div class="inner">
+      <p class="eyebrow el d1">Sahadat Creates · Instagram content studio · Dhaka</p>
+      <h1 class="el d2">Content that <span class="rot" id="rot">SELLS</span><br>for your brand.</h1>
+      <p class="lede el d3">I help Dhaka food, fashion &amp; beauty brands show up premium on Instagram — <b>posts, reels, and captions</b> that turn followers into orders.</p>
+      <div class="hero-actions el d4">
+        <a class="btn btn-solid" href="https://wa.me/8801902960530">📩 DM “SAMPLE” — free sample post</a>
+        <a class="btn btn-ghost" href="#work">↓ See the work</a>
+      </div>
+      <div class="niches el d5">
+        <span class="niche">🍕 Restaurants &amp; cafes</span><span class="niche">👗 Boutiques</span>
+        <span class="niche">💄 Beauty &amp; grooming</span><span class="niche">🏋️ Fitness</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq">
+      <span>Photo posts</span><span>Reels &amp; scripts</span><span>Carousel decks</span><span>Captions &amp; hashtags</span><span>Content strategy</span><span>Deadline discipline</span>
+      <span>Photo posts</span><span>Reels &amp; scripts</span><span>Carousel decks</span><span>Captions &amp; hashtags</span><span>Content strategy</span><span>Deadline discipline</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <p class="eyebrow rv">Sample work — auto-rotating showcase</p>
+      <h2 class="sec-h rv td1">Selected <span class="accent">work</span>, built to <span class="serif">prove</span> it</h2>
+      <p class="sec-sub rv td2">Ei gulo practice/spec pieces — kono client claim na. Ei quality e tumi pabe, tai protinidhito.</p>
+
+      <div class="cwrap rv td2" id="carousel">
+        <div class="ctrack" id="ctrack">
+
+
+          <div class="cslide on">
+            <div class="bg">
+              <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ba-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#1A1A2E"/><stop offset="1" stop-color="#101020"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="500" fill="url(#ba-bg)"/>
+                <rect x="44" y="118" width="300" height="190" rx="18" fill="#2A2A4A" stroke="rgba(255,255,255,.1)"/>
+                <text x="74" y="176" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="28" letter-spacing="2" fill="#9A9AB0">BEFORE</text>
+                <rect x="62" y="196" width="262" height="14" rx="7" fill="#3A3A5A"/>
+                <rect x="62" y="224" width="205" height="14" rx="7" fill="#3A3A5A"/>
+                <rect x="62" y="252" width="240" height="14" rx="7" fill="#3A3A5A"/>
+                <rect x="456" y="118" width="300" height="190" rx="18" fill="#E94560"/>
+                <text x="486" y="176" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="28" letter-spacing="2" fill="#fff">AFTER</text>
+                <rect x="474" y="196" width="262" height="14" rx="7" fill="rgba(255,255,255,.35)"/>
+                <rect x="474" y="224" width="205" height="14" rx="7" fill="#fff"/>
+                <rect x="474" y="252" width="240" height="14" rx="7" fill="rgba(255,255,255,.25)"/>
+                <circle cx="400" cy="213" r="34" fill="#F5A623"/>
+                <text x="413" y="231" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="30" fill="#241B14">→</text>
+                <text x="44" y="424" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="64" fill="#fff">STRATEGY</text>
+                <text x="46" y="484" font-family="Playfair Display,Georgia,serif" font-style="italic" font-weight="900" font-size="46" fill="#F5A623">beats luck.</text>
+                <text x="706" y="90" font-size="30" fill="#F5A623">✦</text>
+              </svg>
+            </div>
+            <div class="shade"></div>
+            <div class="cmeta">
+              <span class="rawkind">Sample · Portfolio post</span>
+              <h3>Before vs After</h3>
+              <p>Strategy beats luck — a 1080×1080 skill-showcase split post with caption and hashtags.</p>
+              <a class="go" href="before-after-post.html">Open full page →</a>
+            </div>
+          </div>
+
+          <div class="cslide">
+            <div class="bg">
+              <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="pi-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#16162C"/><stop offset="1" stop-color="#0D0D16"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="500" fill="url(#pi-bg)"/>
+                <text x="36" y="128" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="80" letter-spacing="1" fill="#F5A623">5 POST</text>
+                <text x="40" y="194" font-family="Playfair Display,Georgia,serif" font-style="italic" font-weight="900" font-size="62" fill="#E94560">ideas that sell</text>
+                <rect x="40" y="222" width="300" height="4" rx="2" fill="#E94560"/>
+                <g font-family="Montserrat,Arial,sans-serif" font-weight="900">
+                  <text x="416" y="130" font-size="42" fill="transparent" stroke="#E94560" stroke-width="2">01</text>
+                  <text x="536" y="130" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="25" fill="#fff">Hook headline post</text>
+                  <text x="416" y="210" font-size="42" fill="transparent" stroke="#E94560" stroke-width="2">02</text>
+                  <text x="536" y="210" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="25" fill="#fff">Sold-out flash</text>
+                  <text x="416" y="290" font-size="42" fill="transparent" stroke="#E94560" stroke-width="2">03</text>
+                  <text x="536" y="290" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="25" fill="#fff">POV / social proof</text>
+                  <text x="416" y="370" font-size="42" fill="transparent" stroke="#E94560" stroke-width="2">04</text>
+                  <text x="536" y="370" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="25" fill="#fff">Behind the scenes</text>
+                  <text x="416" y="450" font-size="42" fill="transparent" stroke="#E94560" stroke-width="2">05</text>
+                  <text x="536" y="450" font-family="Manrope,Arial,sans-serif" font-weight="800" font-size="25" fill="#fff">Fan reacts banger</text>
+                </g>
+                <text x="706" y="100" font-size="28" fill="#F5A623">✦</text>
+                <text x="120" y="420" font-size="26" fill="#E94560">✦</text>
+              </svg>
+            </div>
+            <div class="shade"></div>
+            <div class="cmeta">
+              <span class="rawkind">Sample · Carousel deck</span>
+              <h3>5 Post Ideas That Sell</h3>
+              <p>A 7-slide Instagram carousel — screenshot each square and upload with the caption + hashtags.</p>
+              <a class="go" href="post-ideas-deck.html">Open full page →</a>
+            </div>
+          </div>
+
+          <div class="cslide">
+            <div class="bg">
+              <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="rl-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#B62A1C"/><stop offset="1" stop-color="#8C1F12"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="500" fill="url(#rl-bg)"/>
+                <text x="32" y="172" font-family="Playfair Display,Georgia,serif" font-style="italic" font-weight="900" font-size="88" fill="#F2B33D">20-sec</text>
+                <text x="36" y="258" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="78" letter-spacing="2" fill="#fff">REEL</text>
+                <rect x="38" y="282" width="312" height="54" rx="27" fill="#F2B33D"/>
+                <text x="64" y="316" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="21" letter-spacing="2" fill="#241B14">⚡ AUTO-LOOP SAMPLE</text>
+                <rect x="36" y="44" width="172" height="38" rx="19" fill="#241B14" opacity=".85"/>
+                <text x="58" y="69" font-family="Manrope,Arial,sans-serif" font-weight="700" font-size="17" fill="#F2B33D">@dhaka.cafe</text>
+                <rect x="524" y="62" width="226" height="380" rx="30" fill="#241B14" stroke="#F2B33D" stroke-width="6"/>
+                <rect x="556" y="96" width="162" height="312" rx="14" fill="#B62A1C"/>
+                <text x="600" y="166" font-size="60">🍕</text>
+                <text x="612" y="250" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="27" letter-spacing="3" fill="#F2B33D">PIZZA</text>
+                <rect x="572" y="388" width="130" height="8" rx="4" fill="#3A2A20"/>
+                <rect x="572" y="388" width="76" height="8" rx="4" fill="#F2B33D"/>
+                <text x="706" y="120" font-size="28" fill="#F2B33D">✦</text>
+              </svg>
+            </div>
+            <div class="shade"></div>
+            <div class="cmeta">
+              <span class="rawkind">Sample · Reel</span>
+              <h3>Dhaka Cafe — Pizza Reel</h3>
+              <p>A 20-second 9:16 auto-loop food reel, with a screen-record guide + CapCut workflow.</p>
+              <a class="go" href="reel-dhaka-cafe.html">Open full page →</a>
+            </div>
+          </div>
+
+          <div class="cslide">
+            <div class="bg">
+              <svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="rm-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#E94560"/><stop offset="1" stop-color="#F5A623"/>
+                  </linearGradient>
+                </defs>
+                <rect width="800" height="500" fill="url(#rm-bg)"/>
+                <text x="32" y="118" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="42" letter-spacing="1" fill="#fff">ORIGINAL SONG</text>
+                <text x="36" y="162" font-family="Playfair Display,Georgia,serif" font-style="italic" font-weight="900" font-size="38" fill="#1A1A2E">royalty-free</text>
+                <rect x="34" y="188" width="220" height="44" rx="22" fill="#1A1A2E"/>
+                <text x="58" y="216" font-family="Manrope,Arial,sans-serif" font-weight="700" font-size="18" fill="#fff">🤙 ONE CLICK</text>
+                <text x="120" y="316" font-size="60" fill="#1A1A2E" opacity=".3">♪</text>
+                <text x="704" y="110" font-size="28" fill="#1A1A2E">✦</text>
+                <circle cx="574" cy="240" r="84" fill="#fff"/>
+                <path d="M553 202 630 240 553 278 Z" fill="#E94560"/>
+                <rect x="0" y="356" width="800" height="144" fill="#1A1A2E" opacity=".92"/>
+                <g fill="#fff">
+                  <rect x="40" y="396" width="24" height="70" rx="12"/><rect x="90" y="376" width="24" height="90" rx="12" fill="#F5A623"/>
+                  <rect x="140" y="386" width="24" height="80" rx="12"/><rect x="190" y="366" width="24" height="100" rx="12"/>
+                  <rect x="240" y="406" width="24" height="60" rx="12" fill="#E94560"/><rect x="290" y="376" width="24" height="90" rx="12"/>
+                  <rect x="340" y="356" width="24" height="110" rx="12" fill="#F5A623"/><rect x="390" y="376" width="24" height="90" rx="12"/>
+                  <rect x="440" y="396" width="24" height="70" rx="12"/><rect x="490" y="366" width="24" height="100" rx="12" fill="#E94560"/>
+                  <rect x="540" y="386" width="24" height="80" rx="12"/><rect x="590" y="376" width="24" height="90" rx="12"/>
+                  <rect x="640" y="396" width="24" height="70" rx="12" fill="#F5A623"/><rect x="690" y="406" width="24" height="60" rx="12"/>
+                </g>
+              </svg>
+            </div>
+            <div class="shade"></div>
+            <div class="cmeta">
+              <span class="rawkind">Sample · Reel + music</span>
+              <h3>Reel Maker — Original Song</h3>
+              <p>One click records a 20s webm with a royalty-free synthesized score — export straight to CapCut.</p>
+              <a class="go" href="reel-dhaka-cafe-maker.html">Open full page →</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="ccount" id="ccount">01 / 04</div>
+        <div class="cbar" id="cbar"><i></i></div>
+        <div class="cnav">
+          <button class="cbtn" id="cprev" aria-label="Previous slide">←</button>
+          <div class="cdots" id="cdots"></div>
+          <button class="cbtn" id="cnext" aria-label="Next slide">→</button>
+        </div>
+      </div>
+
+      <p class="cnote rv">
+        🔍 <b>Honest note:</b> ei sob sample/spec pieces — made to show the quality you'd get.
+        DM <b>“SAMPLE”</b> silo next piece apnar brand er jonno. 🙌
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <p class="eyebrow rv">What you get</p>
+      <h2 class="sec-h rv td1">Everything a brand page needs to <span class="accent">grow</span></h2>
+      <div class="services">
+        <div class="srv rv td1"><div class="ico">💻</div><h3>Photo posts</h3><p>Square designs with colour, hierarchy and whitespace — a feed that looks designed, not scattered.</p></div>
+        <div class="srv rv td2"><div class="ico">🎬</div><h3>Reels &amp; scripts</h3><p>20-second loops with hooks, captions and CTAs — the format Instagram rewards most.</p></div>
+        <div class="srv rv td2"><div class="ico">🏗️</div><h3>Carousel decks</h3><p>Multi-slide posts that teach, showcase and convert — saves and shares, not just likes.</p></div>
+        <div class="srv rv td3"><div class="ico">✍️</div><h3>Captions &amp; strategy</h3><p>The right words, the right hashtags, and the plan behind the grind.</p></div>
+      </div>
+      <div class="promise rv td2">
+        <span class="big">🤝</span>
+        <span><b>One promise to every client:</b> the deadline is NEVER missed. Content ships on time, every time. <span class="bangla">(Ei holo amar non-negotiable rule.)</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <p class="eyebrow rv">How it works</p>
+      <h2 class="sec-h rv td1">From <span class="accent">first DM</span> to first client</h2>
+      <div class="steps">
+        <div class="step rv td1"><span class="num">01</span><h3>DM “SAMPLE”</h3><p>Amio ekta free sample post ready korte parbo — no obligation, no catch.</p></div>
+        <div class="step rv td2"><span class="num">02</span><h3>Free 1-week trial</h3><p>Apnar brand er jonno ekta real post — quality nijei dekhen.</p></div>
+        <div class="step rv td2"><span class="num">03</span><h3>Monthly plan</h3><p>Posts, reels scripts, captions, hashtags — weekly, ready to upload.</p></div>
+        <div class="step rv td3"><span class="num">04</span><h3>Never miss a deadline</h3><p>On-time delivery, every week. Trust builds on promises kept.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <p class="eyebrow rv">Monthly plans</p>
+      <h2 class="sec-h rv td1">Rate card — <span class="accent">simple</span>, no hidden costs</h2>
+      <div class="tiers">
+        <div class="tier rv td1">
+          <span class="name">Starter</span><span class="price">2,500<small>৳/mo</small></span>
+          <ul>
+            <li><span class="tick">✓</span>4 photo posts</li>
+            <li><span class="tick">✓</span>Captions + hashtags</li>
+            <li><span class="tick">✓</span>1 design refresh</li>
+            <li><span class="tick">✓</span>Email/chat reply</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://wa.me/8801902960530">Choose Starter</a>
+        </div>
+        <div class="tier pop rv td2">
+          <span class="pop-pill">Most popular</span>
+          <span class="name">Growth</span><span class="price">5,000<small>৳/mo</small></span>
+          <ul>
+            <li><span class="tick">✓</span>8 posts (incl. carousels)</li>
+            <li><span class="tick">✓</span>1 reel script</li>
+            <li><span class="tick">✓</span>Content strategy</li>
+            <li><span class="tick">✓</span>Monthly review call</li>
+          </ul>
+          <a class="btn btn-solid" href="https://wa.me/8801902960530">Choose Growth</a>
+        </div>
+        <div class="tier rv td3">
+          <span class="name">Pro</span><span class="price">8,000<small>৳/mo</small></span>
+          <ul>
+            <li><span class="tick">✓</span>12 posts (incl. carousels)</li>
+            <li><span class="tick">✓</span>2 reel scripts</li>
+            <li><span class="tick">✓</span>Strategy + content calendar</li>
+            <li><span class="tick">✓</span>Priority support</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://wa.me/8801902960530">Choose Pro</a>
+        </div>
+      </div>
+      <p class="price-note rv td2">Discount nai, hidden charge nai — eitai monthly. Contract er baire kono kotha DM e.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="band rv">
+        <div class="bbg">
+          <div class="art">
+            <svg viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <linearGradient id="cta-bg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#131322"/><stop offset="1" stop-color="#0D0D16"/>
+                </linearGradient>
+              </defs>
+              <rect width="1200" height="560" fill="url(#cta-bg)"/>
+              <line x1="60" y1="60" x2="1140" y2="60" stroke="rgba(245,245,247,.08)" stroke-width="2"/>
+              <line x1="60" y1="500" x2="1140" y2="500" stroke="rgba(245,245,247,.08)" stroke-width="2"/>
+              <circle cx="1030" cy="290" r="200" fill="#E94560"/>
+              <circle cx="1030" cy="290" r="256" fill="none" stroke="#F5A623" stroke-width="2" stroke-dasharray="10 14" opacity=".5"/>
+              <text x="880" y="268" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="72" fill="#fff">DM</text>
+              <text x="850" y="352" font-family="Montserrat,Arial,sans-serif" font-weight="900" font-size="96" fill="#F5A623">SAMPLE</text>
+              <circle cx="1030" cy="462" r="26" fill="#F5A623"/>
+              <text x="1010" y="476" font-size="30">⚡</text>
+              <text x="150" y="180" font-size="40" fill="#F5A623">✦</text>
+              <text x="340" y="420" font-size="28" fill="#E94560">✦</text>
+              <rect x="120" y="300" width="290" height="52" rx="26" fill="#F5A623"/>
+              <text x="150" y="334" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="21" fill="#131322">⏱ READY IN 1–2 DAYS</text>
+              <text x="468" y="120" font-size="70" fill="transparent" stroke="#F5A623" stroke-opacity=".35" stroke-width="1.5">S</text>
+            </svg>
+          </div>
+          <div class="bshade"></div>
+        </div>
+        <h2>Apnar brand er jonno ekta <span class="serif">free sample post.</span></h2>
+        <p>DM pathai — 1-2 din er moddhe ekta demo post ready. Bhalo lagle plan, na lagle kono obligation nai.</p>
+        <div class="btnw">
+          <a class="btn btn-solid" href="https://wa.me/8801902960530">📩 DM “SAMPLE” on WhatsApp</a>
+          <a class="btn btn-ghost" href="#work">Back to the work ↑</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <b>© 2026 Sahadat Creates</b> · @sahadat.creates · Dhaka, Bangladesh<br>
+    Content that SELLS 🚀 · Direct me — ajao first client er dike.
+  </footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+
+  var rot = document.getElementById('rot');
+  if(rot){
+    var words = ['SELLS','CONNECTS','CONVERTS','GROWS','CLICKS'];
+    var wi = 0;
+    setInterval(function(){
+      wi = (wi + 1) % words.length;
+      rot.textContent = words[wi];
+      rot.classList.remove('swap');
+      void rot.offsetWidth;
+      rot.classList.add('swap');
+    }, 2600);
+  }
+
+  var io = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, {threshold:.12})
+    : null;
+  var rvs = document.querySelectorAll('.rv');
+  Array.prototype.forEach.call(rvs, function(el){
+    if(io){ io.observe(el); } else { el.classList.add('in'); }
+  });
+
+  (function(){
+    var track = document.getElementById('ctrack');
+    if(!track) return;
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.cslide'));
+    var n = slides.length;
+    var dotsWrap = document.getElementById('cdots');
+    var prevBtn = document.getElementById('cprev');
+    var nextBtn = document.getElementById('cnext');
+    var count = document.getElementById('ccount');
+    var bar = document.getElementById('cbar');
+    var wrap = document.getElementById('carousel');
+    var i = 0, timer = null;
+    var DUR = 4600;
+
+    function pad(x){ return String(x).padStart(2,'0'); }
+    function go(k){
+      slides[i].classList.remove('on');
+      dotsWrap.children[i].classList.remove('on');
+      i = (k + n) % n;
+      slides[i].classList.add('on');
+      dotsWrap.children[i].classList.add('on');
+      count.textContent = pad(i + 1) + ' / ' + pad(n);
+      bar.classList.remove('running');
+      void bar.offsetWidth;
+      bar.classList.add('running');
+    }
+    function reset(){
+      clearInterval(timer);
+      timer = setInterval(function(){ go(i + 1); }, DUR);
+    }
+    function buildDots(){
+      slides.forEach(function(s, k){
+        var b = document.createElement('button');
+        b.className = 'cdot';
+        b.setAttribute('aria-label', 'Go to slide ' + (k + 1));
+        b.addEventListener('click', function(){ go(k); reset(); });
+        dotsWrap.appendChild(b);
+      });
+    }
+    if(prevBtn) prevBtn.addEventListener('click', function(){ go(i - 1); reset(); });
+    if(nextBtn) nextBtn.addEventListener('click', function(){ go(i + 1); reset(); });
+    if(wrap){
+      wrap.addEventListener('mouseenter', function(){ clearInterval(timer); });
+      wrap.addEventListener('mouseleave', function(){ reset(); });
+      wrap.addEventListener('focusin', function(){ clearInterval(timer); });
+      wrap.addEventListener('focusout', function(){ reset(); });
+    }
+    document.addEventListener('keydown', function(e){
+      if(document.activeElement && wrap && wrap.contains(document.activeElement)){
+        if(e.key === 'ArrowRight'){ go(i + 1); reset(); }
+        if(e.key === 'ArrowLeft'){ go(i - 1); reset(); }
+      }
+    });
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ clearInterval(timer); } else { reset(); }
+    });
+    buildDots();
+    go(0);
+    reset();
+  })();
+})();
+</script>
+</body>
+</html>

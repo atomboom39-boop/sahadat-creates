@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --ink:#0D0D16; --panel:#1A1A2E; --panel-2:#21213B;
+    --coral:#E94560; --gold:#F5A623; --green:#4CD97B;
+    --teal:#2EC4B6; --violet:#8F6BFF;
+    --white:#F5F5F7; --muted:#9A9AB0; --line:rgba(245,245,247,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--white);font-family:Manrope,-apple-system,"Segoe UI",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 22px 88px;padding-block:40px}
+  .breadcrumb{font-family:Montserrat,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px}
+  .breadcrumb::before{content:"";width:34px;height:2px;background:var(--coral)}
+  h1{font-family:Montserrat,sans-serif;font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;letter-spacing:-.02em;margin-top:10px;text-wrap:balance}
+  h1 .accent{color:var(--coral)}
+  .sub{color:var(--muted);margin-top:10px;max-width:62ch}
+  .sample-badge{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:rgba(245,166,35,.08);
+    border:1px solid rgba(245,166,35,.35);color:#E8E2D6;font-size:.82rem;padding:9px 14px;border-radius:999px}
+  .sample-badge b{color:var(--gold)}
+
+  /* stat strip */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 20px 18px;position:relative;overflow:hidden}
+  .tile .lbl{font-family:Montserrat,sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .tile .val{font-family:Montserrat,sans-serif;font-weight:900;font-size:2.1rem;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
+  .tile .delta{font-size:.82rem;color:var(--muted);margin-top:4px}
+  .tile .bar{position:absolute;left:0;right:0;bottom:0;height:3px}
+  .b-coral .bar{background:var(--coral)}.b-gold .bar{background:var(--gold)}
+  .b-teal .bar{background:var(--teal)}.b-green .bar{background:var(--green)}
+  .tile .val.coral{color:var(--coral)}.tile .val.gold{color:var(--gold)}
+  .tile .val.teal{color:var(--teal)}.tile .val.green{color:var(--green)}
+
+  .grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .card h2{font-family:Montserrat,sans-serif;font-size:1.02rem;font-weight:800;display:flex;align-items:center;gap:10px}
+  .card h2 .n{color:var(--muted);font-size:.72rem;letter-spacing:.12em;font-weight:700}
+  .card .hint{color:var(--muted);font-size:.82rem;margin-top:4px}
+  svg{display:block;width:100%;height:auto}
+
+  /* recessive grid / axis */
+  .axis{stroke:rgba(245,245,247,.08);stroke-width:1}
+  .barlabel{font-family:Montserrat,sans-serif;font-weight:800;font-size:11px;fill:var(--muted)}
+  .bartext{font-family:Montserrat,sans-serif;font-weight:900;font-size:12px;text-anchor:middle}
+  .bar rect{transition:opacity .15s}
+  .bar:hover rect{opacity:.85}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}
+  .lg{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;color:#D5D5E0}
+  .sw{width:11px;height:11px;border-radius:3px;flex:none}
+  .donut-center{font-family:Montserrat,sans-serif;font-weight:900}
+
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.86rem}
+  th{font-family:Montserrat,sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:10px;border-bottom:1px solid rgba(245,245,247,.06);color:#E4E4EC;vertical-align:top}
+  td.lbl{font-weight:800;color:#fff}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;border-radius:999px;padding:4px 10px;white-space:nowrap}
+  .st-planned{background:rgba(245,166,35,.14);color:var(--gold)}
+  .st-draft{background:rgba(143,107,255,.16);color:#B9A6FF}
+  .st-ready{background:rgba(46,196,182,.15);color:var(--teal)}
+  .st-shipped{background:rgba(76,217,123,.14);color:var(--green)}
+  .fmt{font-family:Montserrat,sans-serif;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+
+  /* pricing mini */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+  .tier.pop{border-color:var(--coral)}
+  .tier .name{font-family:Montserrat,sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .tier .price{font-family:Montserrat,sans-serif;font-weight:900;font-size:1.5rem;margin-top:8px;font-variant-numeric:tabular-nums}
+  .tier .price small{font-size:.8rem;color:var(--muted);font-weight:700}
+  .tier .items{color:var(--muted);font-size:.82rem;margin-top:8px;line-height:1.6}
+
+  footer{margin-top:30px;color:var(--muted);font-size:.84rem;line-height:1.9}
+  footer b{color:#fff}
+
+  .js .rv{opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease}
+  .js .rv.in{opacity:1;transform:none}
+  .td1{transition-delay:.08s}.td2{transition-delay:.16s}.td3{transition-delay:.24s}
+
+  @media (max-width:840px){
+    .tiles{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:1fr}
+    .tiers{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .js .rv{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="breadcrumb">Sahadat Creates · Monthly snapshot</p>
+  <h1>Content Studio <span class="accent">Dashboard</span></h1>
+  <p class="sub">Akkhono planning hobeyir moto — ei ektu sample month er sobar item. Ei dashboard ei Pur amar content plan, mix, ar pipeline dekha — real client data na (esob sample).</p>
+  <div class="sample-badge"><b>SAMPLE DATA</b> — kono real client figure na. Aage real month thaklei etake live kore demo.</div>
+
+  <!-- STAT TILES -->
+  <div class="tiles">
+    <div class="tile b-coral rv td1"><span class="lbl">Posts planned</span><div class="val coral">24</div><div class="delta">current sample month</div></div>
+    <div class="tile b-gold rv td2"><span class="lbl">Reels</span><div class="val gold">8</div><div class="delta">33% of total</div></div>
+    <div class="tile b-teal rv td2"><span class="lbl">Carousels</span><div class="val teal">4</div><div class="delta">saves &amp; shares magnet</div></div>
+    <div class="tile b-green rv td3"><span class="lbl">Deadline hits</span><div class="val green">100%</div><div class="delta">non-negotiable rule</div></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="grid">
+    <div class="card rv td1">
+      <h2><span class="n">01</span> Weekly posting plan <span style="color:var(--muted);font-weight:600;margin-left:auto;font-size:.78rem">Mon → Sun</span></h2>
+      <p class="hint">24 items — post density per day. Samporcyan week e koto gulo ready hobe.</p>
+
+      <svg viewBox="0 0 640 250" role="img" aria-label="Bar chart: planned posts per weekday, Mon 3, Tue 4, Wed 2, Thu 4, Fri 3, Sat 2, Sun 2">
+        <line x1="50" y1="16" x2="50" y2="196" class="axis"/>
+        <line x1="50" y1="196" x2="622" y2="196" class="axis"/>
+        <g stroke="rgba(245,245,247,.07)">
+          <line x1="50" y1="46" x2="622" y2="46"/>
+          <line x1="50" y1="96" x2="622" y2="96"/>
+          <line x1="50" y1="146" x2="622" y2="146"/>
+        </g>
+        <!-- bars: x start 82, band 78, bar w 44 -->
+        <g class="bar"></g>
+        <g class="text"></g>
+      </svg>
+      <div class="legend"><span class="lg"><span class="sw" style="background:var(--coral)"></span>Planned post</span><span class="lg"><span class="sw" style="background:var(--gold)"></span>Peak day (Tue, Thu)</span></div>
+    </div>
+
+    <div class="card rv td2">
+      <h2><span class="n">02</span> Content mix</h2>
+      <p class="hint">Format split of the 24 items.</p>
+      <svg viewBox="0 0 320 240" role="img" aria-label="Donut chart: posts 13, reels 5, carousels 4, stories 2">
+        <g transform="rotate(-90 160 118)">
+          <circle cx="160" cy="118" r="78" pathLength="100" fill="none" stroke-width="32" stroke="#E94560" stroke-dasharray="52.5 999"/>
+          <circle cx="160" cy="118" r="78" pathLength="100" fill="none" stroke-width="32" stroke="#F5A623" stroke-dasharray="20 999" stroke-dashoffset="-54"/>
+          <circle cx="160" cy="118" r="78" pathLength="100" fill="none" stroke-width="32" stroke="#8F6BFF" stroke-dasharray="15.5 999" stroke-dashoffset="-75.5"/>
+          <circle cx="160" cy="118" r="78" pathLength="100" fill="none" stroke-width="32" stroke="#2EC4B6" stroke-dasharray="7.4 999" stroke-dashoffset="-92.4"/>
+        </g>
+        <text x="160" y="112" text-anchor="middle" class="donut-center" style="font-size:30px">24</text>
+        <text x="160" y="134" text-anchor="middle" class="donut-center" style="font-size:12px;fill:var(--muted)">/ month</text>
+      </svg>
+      <div class="legend">
+        <span class="lg"><span class="sw" style="background:var(--coral)"></span>Posts 13</span>
+        <span class="lg"><span class="sw" style="background:var(--gold)"></span>Reels 5</span>
+        <span class="lg"><span class="sw" style="background:var(--violet)"></span>Carousels 4</span>
+        <span class="lg"><span class="sw" style="background:var(--teal)"></span>Stories 2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE TABLE -->
+  <div class="card rv td1" style="margin-top:16px">
+    <h2><span class="n">03</span> Pipeline — this sample week</h2>
+    <p class="hint">Table view — sob item er format, theme ar status. (Ei table e color chara-o readable — status label always thake.)</p>
+    <table>
+      <thead><tr><th>Day</th><th>Format</th><th>Piece</th><th>Theme</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Mon</td><td class="fmt" style="color:var(--teal)">Carousel</td><td>3-slide “how to order”</td><td>Saves magnet</td><td><span class="pill st-shipped">Shipped</span></td></tr>
+        <tr><td class="lbl">Tue</td><td class="fmt" style="color:var(--coral)">Post</td><td>Hook headline + price</td><td>Flash offer</td><td><span class="pill st-ready">Ready</span></td></tr>
+        <tr><td class="lbl">Tue</td><td class="fmt" style="color:var(--gold)">Reel</td><td>20s auto-loop BTS</td><td>Kitchen energy</td><td><span class="pill st-draft">Draft</span></td></tr>
+        <tr><td class="lbl">Wed</td><td class="fmt" style="color:var(--coral)">Post</td><td>Quote + whitespace</td><td>Brand voice</td><td><span class="pill st-planned">Planned</span></td></tr>
+        <tr><td class="lbl">Thu</td><td class="fmt" style="color:var(--gold)">Reel</td><td>Star social proof</td><td>UGC style</td><td><span class="pill st-planned">Planned</span></td></tr>
+        <tr><td class="lbl">Fri</td><td class="fmt" style="color:var(--violet)">Post</td><td>Before/after redesign</td><td>Strategy showcase</td><td><span class="pill st-ready">Ready</span></td></tr>
+      </tbody>
+    </table>
+    <div class="legend" style="margin-top:14px">
+      <span class="lg"><span class="sw" style="background:var(--gold)"></span>Planned</span>
+      <span class="lg"><span class="sw" style="background:var(--violet)"></span>Draft</span>
+      <span class="lg"><span class="sw" style="background:var(--teal)"></span>Ready</span>
+      <span class="lg"><span class="sw" style="background:var(--green)"></span>Shipped</span>
+    </div>
+  </div>
+
+  <!-- PRICING MINI -->
+  <div class="tiers">
+    <div class="tier rv td1"><span class="name">Starter</span><div class="price">2,500<small>৳/mo</small></div><div class="items">4 posts<br>captions + hashtags</div></div>
+    <div class="tier pop rv td2"><span class="name">Growth</span><div class="price">5,000<small>৳/mo</small></div><div class="items">8 posts (incl. carousels)<br>1 reel script + strategy</div></div>
+    <div class="tier rv td3"><span class="name">Pro</span><div class="price">8,000<small>৳/mo</small></div><div class="items">12 posts (incl. carousels)<br>2 reel scripts + calendar</div></div>
+  </div>
+
+  <footer>
+    <b>Sahadat Creates</b> · @sahadat.creates · Dhaka<br>
+    Sob value ei page e <b>sample/planning</b> — seta honest label. Real month er data ki-ke aste gele ei page live e ana jabe.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var io = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function(es){
+        es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, {threshold:.12})
+    : null;
+  document.querySelectorAll('.rv').forEach(function(el){
+    if(io){ io.observe(el); } else { el.classList.add('in'); }
+  });
+
+  /* build the weekly bar chart */
+  (function(){
+    var barG = document.querySelector('.card .bar');
+    var txtG = document.querySelector('.card .text');
+    if(!barG) return;
+    var days = [
+      {l:'Mon',v:3},{l:'Tue',v:4},{l:'Wed',v:2},{l:'Thu',v:4},{l:'Fri',v:3},{l:'Sat',v:2},{l:'Sun',v:2}
+    ];
+    var max = 4, yBase = 196, hPer = 46; /* 46px per unit */
+    var namesp = 'http://www.w3.org/2000/svg';
+    function el(tag, attrs){
+      var e = document.createElementNS(namesp, tag);
+      for(var k in attrs) e.setAttribute(k, attrs[k]);
+      return e;
+    }
+    days.forEach(function(d, i){
+      var x = 60 + i*82;
+      var h = d.v * hPer;
+      var y = yBase - h;
+      var isPeak = (d.v === max);
+      var color = isPeak ? '#F5A623' : '#E94560';
+      var r = el('rect', {x:x, y:y, width:44, height:h, rx:6, fill:color});
+      var title = el('title', {}); title.textContent = d.l + ': ' + d.v + ' posts';
+      r.appendChild(title);
+      barG.appendChild(r);
+      txtG.appendChild(el('text', {x:x+22, y:y-7, 'class':'bartext', fill:color, 'text-anchor':'middle'})).textContent = d.v;
+      txtG.appendChild(el('text', {x:x+22, y:yBase+20, 'class':'barlabel', 'text-anchor':'middle'})).textContent = d.l;
+    });
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafe Demo Post</title>
+<style>
+  :root{
+    --bg:#111114;            /* page shell — neutral dark */
+    --post-ink:#241B14;      /* warm dark for text overlays */
+    --tomato:#E14B32;        /* pizza/tomato accent */
+    --cheese:#F2B33D;        /* warm yellow, used sparingly */
+    --white:#FFFFFF;
+    --muted:#B9B9C6;
+    --line:rgba(255,255,255,.1);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:#fff;
+    font-family:Manrope,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 72px}
+  .eyebrow{
+    font-family:Montserrat,sans-serif;font-size:.76rem;font-weight:700;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:12px;margin:0 0 14px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--tomato)}
+  header h1{
+    font-family:Montserrat,sans-serif;font-size:clamp(1.6rem,4.5vw,2.4rem);
+    font-weight:900;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em;
+  }
+  header h1 .accent{color:var(--tomato)}
+  header p.sub{color:var(--muted);max-width:62ch;margin:14px 0 0;font-size:1rem}
+  .brand-pill{
+    display:inline-flex;align-items:center;gap:10px;margin:22px 0 0;
+    background:rgba(255,255,255,.06);border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;font-family:Montserrat,sans-serif;
+    font-weight:700;font-size:.85rem;letter-spacing:.04em;
+  }
+  .export-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:20px}
+  #exportBtn{
+    display:inline-flex;align-items:center;gap:10px;background:var(--tomato);color:#fff;
+    border:none;cursor:pointer;font-family:Montserrat,sans-serif;font-weight:900;
+    font-size:.95rem;padding:13px 20px;border-radius:12px;
+    transition:transform .15s ease,filter .15s ease;
+  }
+  #exportBtn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  #exportBtn:disabled{cursor:wait;filter:brightness(.8)}
+  .export-note{color:var(--muted);font-size:.85rem;max-width:50ch;margin:0}
+
+  /* ---------- the post ---------- */
+  .frame{margin-top:36px;max-width:560px;background:#0d0d10;border-radius:var(--radius);border:1px solid var(--line);overflow:hidden}
+  .slide{
+    position:relative;aspect-ratio:1/1;width:100%;overflow:hidden;
+    background:#241B14;color:#fff;
+  }
+  .slide .pic{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    display:block;
+  }
+  .slide .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(18,12,8,.92) 0%,rgba(18,12,8,.55) 38%,rgba(18,12,8,0) 58%);
+  }
+  .slide-top{
+    position:absolute;top:0;left:0;right:0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;
+    font-family:Montserrat,sans-serif;font-size:.7rem;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;color:#fff;
+  }
+  .slide-top .tag{background:rgba(18,12,8,.55);border-radius:999px;padding:7px 13px;color:var(--cheese)}
+  .slide-top .handle{background:rgba(18,12,8,.55);border-radius:999px;padding:7px 13px}
+  .slide-bot{
+    position:absolute;bottom:0;left:0;right:0;padding:0 20px 18px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+  }
+  .eyebrow-post{
+    font-family:Montserrat,sans-serif;color:var(--cheese);font-size:.68rem;
+    font-weight:800;letter-spacing:.28em;text-transform:uppercase;margin:0;
+  }
+  .headline{
+    font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;
+    font-size:clamp(2.1rem,6.5vw,3.5rem);line-height:.98;margin:0;color:#fff;
+    text-shadow:0 2px 14px rgba(0,0,0,.35);
+  }
+  .offer-line{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    font-family:Manrope,sans-serif;margin:0;
+  }
+  .offer-line .what{font-size:clamp(.9rem,2.6vw,1.05rem);color:#fff;font-weight:600}
+  .offer-line .price{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-style:italic;font-size:clamp(1.2rem,3.4vw,1.6rem);color:var(--cheese)}
+  .loc{font-size:.8rem;color:rgba(255,255,255,.78);margin:0}
+  .cta{
+    margin-top:2px;display:inline-flex;align-items:center;gap:8px;
+    background:var(--tomato);color:#fff;border-radius:10px;padding:11px 18px;
+    font-family:Montserrat,sans-serif;font-weight:800;font-size:.86rem;letter-spacing:.02em;
+  }
+
+  /* ---------- copy sections ---------- */
+  .copy{display:grid;gap:26px;margin-top:44px}
+  @media(min-width:900px){.copy{grid-template-columns:1fr 1fr}}
+  .copy h4{
+    font-family:Montserrat,sans-serif;font-size:.76rem;font-weight:800;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--cheese);margin:0 0 14px;
+  }
+  pre{
+    background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;font-family:Manrope,sans-serif;font-size:.95rem;
+    color:#fff;line-height:1.65;margin:0;white-space:pre-wrap;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:.86rem;padding:7px 12px;border-radius:999px;font-family:Montserrat,sans-serif;font-weight:600}
+  .dm-pitch{grid-column:1 / -1;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .dm-pitch h4{color:var(--tomato)}
+  .dm-pitch pre{background:rgba(0,0,0,.25)}
+  .img-credit{color:var(--muted);font-size:.78rem;margin:10px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Demo Post · Client Pitch</p>
+    <h1>Dhaka Cafe — <span class="accent">Photo-led Pizza Offer</span></h1>
+    <p class="sub">Oder vibe er moto — ekta real food photo + minimal caption. Client er nijer pizza photo nibo, tapori placeholder e <b>ekhane demo hisebe ekta pizza photo</b> deowa.</p>
+    <div class="brand-pill">🍕 Good Food. Good Mood. · @dhaka.cafe</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download demo post (1080×1080 PNG)</button>
+      <p class="export-note">Export er images photo thakbe — jodi download er moddhe photo kormo na, tahole chrome e image cache hoye jabe.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide" id="slide">
+      <img class="pic" id="pic" crossorigin="anonymous"
+           src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1080&q=80"
+           alt="Pizza">
+      <div class="scrim"></div>
+      <div class="slide-top">
+        <span class="tag">🍕 Good Food. Good Mood.</span>
+        <span class="handle">@dhaka.cafe</span>
+      </div>
+      <div class="slide-bot">
+        <p class="eyebrow-post">Special Combo</p>
+        <h2 class="headline">Pizza Night</h2>
+        <p class="offer-line">
+          <span class="what">1 Medium Pizza + 1 Soft Drink</span>
+          <span class="price">= 599৳</span>
+        </p>
+        <p class="loc">📍 Mirpur-10, DESCO er pichoner road, Lane-18, Block-C</p>
+        <span class="cta">DM “PIZZA” to order</span>
+      </div>
+    </div>
+    <p class="img-credit">Demo photo: Unsplash · Client er project e oder nijer pizza photo use korbe</p>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>🍕 PIZZA NIGHT is here!
+
+Golden crust, loads of cheese —
+fresh out of our oven. 😋
+
+🔥 Special Combo
+1 Medium Pizza + 1 Soft Drink = 599৳
+
+📍 Mirpur-10, DESCO er pichoner road,
+Lane-18, Block-C
+
+📩 DM "PIZZA" to order
+
+Good Food. Good Mood. Every Day.</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#DhakaCafe</span><span class="tag">#PizzaDhaka</span>
+        <span class="tag">#Mirpur10</span><span class="tag">#DhakaFood</span>
+        <span class="tag">#PizzaLover</span><span class="tag">#ItalianFoodDhaka</span>
+        <span class="tag">#CheesePizza</span><span class="tag">#FoodieBangladesh</span>
+        <span class="tag">#MirpurCafe</span><span class="tag">#BangladeshFood</span>
+      </div>
+    </div>
+    <div class="dm-pitch">
+      <h4>📩 DM Pitch Message — @dhaka.cafe ke pathaite</h4>
+      <pre>Assalamualaikum @dhaka.cafe team! 👋
+
+Ami Sahadat — content creator. Apnar page ta
+dekhechi — reel content onk valo lagey!
+
+Ami apnar brand er jonno ekta DEMO post ready
+korechi — ekdom free, kono obligation nai. 🍕
+
+[Export kora PNG ta attach kore pathaben]
+
+Positive hole monthly plan er kotha bolte parbo —
+photo post, reels scripts, captions, hashtags
+sob ready kore dibo. 💪
+
+Ki mone hoy? 🙌</pre>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn=document.getElementById('exportBtn');
+    if(!btn||typeof html2canvas==='undefined')return;
+    function imgReady(){
+      var img=document.getElementById('pic');
+      return img.complete?Promise.resolve():Promise.resolve(img.decode().then(function(){},function(){}));
+    }
+    btn.addEventListener('click',function(){
+      var el=document.getElementById('slide');
+      btn.disabled=true;btn.textContent='Exporting…';
+      imgReady().then(function(){
+        var scale=1080/el.clientWidth;
+        return html2canvas(el,{scale:scale,useCORS:true});
+      }).then(function(canvas){
+        var a=document.createElement('a');
+        a.href=canvas.toDataURL('image/png');
+        a.download='demo-dhaka-cafe-pizza-night.png';
+        document.body.appendChild(a);a.click();a.remove();
+        btn.disabled=false;btn.textContent='⬇️ Download demo post (1080×1080 PNG)';
+      });
+    });
+  })();
+</script>
+</body>
+</html>

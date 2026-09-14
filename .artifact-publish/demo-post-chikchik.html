@@ -1,0 +1,113 @@
+<title>ChikChik Demo Post</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap">
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Demo Post · Client Pitch</p>
+    <h1>ChikChik — <span class="accent">Playful Chicken Fingers Post</span> 🍗</h1>
+    <p class="sub">Oder meme-forward, budget-snack energy match koray banao — chicken fingers photo + bold red/yellow + "Never Frozen. Always Fresh." tagline.</p>
+    <div class="brand-pill">🍗 Never Frozen. Always Fresh. · @eatchikchik</div>
+    <div class="export-row">
+      <button id="exportBtn" type="button">⬇️ Download demo post (1080×1080 PNG)</button>
+      <p class="export-note">Demo photo placeholder — client er delivery te oder nijer chicken fingers photo use korbe.</p>
+    </div>
+  </header>
+
+  <div class="frame">
+    <div class="slide" id="slide">
+      <div class="pic-zone">
+        <img id="pic" crossorigin="anonymous"
+             src="https://images.unsplash.com/photo-1562967914-608f82629710?w=1080&q=80"
+             alt="Chicken fingers">
+        <span class="flag">🔥 First Chicken Finger Restaurant 🇧🇩</span>
+        <span class="handle">@eatchikchik</span>
+      </div>
+      <div class="panel">
+        <p class="eyebrow-post">Newest Snack Spot</p>
+        <h2 class="headline">Crispy Chicken Fingers</h2>
+        <p class="fresh">✓ Never Frozen. Always Fresh.</p>
+        <div class="combo"><span class="emo">🍗</span> Four Finger Combo — budget-friendly done right</div>
+        <p class="loc">📍 Uttara, Sector 13 — Garib-E-Nawaz Ave, House 42</p>
+        <span class="cta">Order on Foodpanda 📲</span>
+      </div>
+    </div>
+    <p class="img-credit">Demo photo: Unsplash · Project e oder nijer chicken fingers photo use korbe</p>
+  </div>
+
+  <div class="copy">
+    <div>
+      <h4>Caption — copy kore paste korbo</h4>
+      <pre>🍗 HUNGER DETECTED. SOLUTION READY.
+
+Crispy outside, juicy inside — our chicken
+fingers are NEVER FROZEN, ALWAYS FRESH. 🇧🇩
+
+🔥 First chicken finger restaurant in BD
+😋 Budget snack done right
+
+📍 Uttara, Sector 13
+Garib-E-Nawaz Avenue, House 42
+
+📲 Order via Foodpanda now!
+
+Never Frozen. Always Fresh.</pre>
+    </div>
+    <div>
+      <h4>Hashtags — first comment e dibo</h4>
+      <div class="tags">
+        <span class="tag">#ChikChik</span><span class="tag">#ChickenFingers</span>
+        <span class="tag">#ChickenFingerBD</span><span class="tag">#Uttara</span>
+        <span class="tag">#UttaraFood</span><span class="tag">#DhakaFood</span>
+        <span class="tag">#FastFoodBD</span><span class="tag">#NeverFrozenAlwaysFresh</span>
+        <span class="tag">#BudgetFood</span><span class="tag">#Foodpanda</span>
+        <span class="tag">#FriedChicken</span><span class="tag">#BangladeshFood</span>
+      </div>
+    </div>
+    <div class="dm-pitch">
+      <h4>📩 DM Pitch Message — @eatchikchik ke pathaite</h4>
+      <pre>Assalamualaikum @eatchikchik team! 👋
+
+Apnar brand amader onek pasand! Chunger finger
+concept + "Never Frozen. Always Fresh." — jhakas! 🍗
+
+Ami Sahadat — content creator. Apnar brand er
+jonno ekta DEMO post ready koreche, kono obligation
+nai. 🙌
+
+[Export kora PNG ta attach korun]
+
+Bhalo lagte pare — monthly plan er kotha boli:
+post designs, reels scripts, playful memes, captions,
+hashtags — sob ready kore dibo! 💪
+
+Ki mone hoy? 🙌</pre>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  (function(){
+    var btn=document.getElementById('exportBtn');
+    if(!btn||typeof html2canvas==='undefined')return;
+    function imgReady(){
+      var img=document.getElementById('pic');
+      return img.complete?Promise.resolve():Promise.resolve(img.decode().then(function(){},function(){}));
+    }
+    btn.addEventListener('click',function(){
+      var el=document.getElementById('slide');
+      btn.disabled=true;btn.textContent='Exporting…';
+      imgReady().then(function(){
+        var scale=1080/el.clientWidth;
+        return html2canvas(el,{scale:scale,useCORS:true});
+      }).then(function(canvas){
+        var a=document.createElement('a');
+        a.href=canvas.toDataURL('image/png');
+        a.download='demo-chikchik-crispy-fingers.png';
+        document.body.appendChild(a);a.click();a.remove();
+        btn.disabled=false;btn.textContent='⬇️ Download demo post (1080×1080 PNG)';
+      });
+    });
+  })();
+</script>
