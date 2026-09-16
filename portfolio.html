@@ -202,7 +202,18 @@
             text-align: center;
             padding: 140px 24px 100px;
             position: relative;
+            background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=70');
+            background-size: cover;
+            background-position: center;
         }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(6,6,15,0.7) 0%, rgba(6,6,15,0.85) 50%, rgba(6,6,15,1) 100%);
+            z-index: 0;
+        }
+        .hero > * { position: relative; z-index: 1; }
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -485,6 +496,15 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        .work-card-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(6,6,15,0.85) 0%, rgba(6,6,15,0.3) 50%, rgba(6,6,15,0.15) 100%);
+            z-index: 1;
         }
         .work-card-visual .overlay-text {
             font-family: 'Space Grotesk', sans-serif;
@@ -494,32 +514,24 @@
             text-align: center;
             padding: 24px;
             z-index: 2;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
         }
         .work-card-visual .bg-pattern {
             position: absolute;
             inset: 0;
             opacity: 0.2;
         }
-        .card-theme-purple { background: linear-gradient(135deg, #1a1040 0%, #0d0825 50%, #150a30 100%); }
-        .card-theme-purple .bg-pattern {
-            background: radial-gradient(circle at 30% 30%, rgba(168,85,247,0.3), transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(236,72,153,0.2), transparent 60%);
+        .card-theme-purple {
+            background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80');
         }
-        .card-theme-green { background: linear-gradient(135deg, #0a1a18 0%, #061215 50%, #0a2020 100%); }
-        .card-theme-green .bg-pattern {
-            background: radial-gradient(circle at 30% 30%, rgba(16,185,129,0.3), transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(6,182,212,0.2), transparent 60%);
+        .card-theme-green {
+            background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80');
         }
-        .card-theme-orange { background: linear-gradient(135deg, #1a1208 0%, #18100a 50%, #201a0a 100%); }
-        .card-theme-orange .bg-pattern {
-            background: radial-gradient(circle at 30% 30%, rgba(245,158,11,0.3), transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(234,88,12,0.2), transparent 60%);
+        .card-theme-orange {
+            background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80');
         }
-        .card-theme-pink { background: linear-gradient(135deg, #1a0a1c 0%, #15081a 50%, #200a25 100%); }
-        .card-theme-pink .bg-pattern {
-            background: radial-gradient(circle at 30% 30%, rgba(236,72,153,0.3), transparent 60%),
-                        radial-gradient(circle at 70% 70%, rgba(168,85,247,0.2), transparent 60%);
+        .card-theme-pink {
+            background-image: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80');
         }
         .work-card-info { padding: 24px 28px 28px; }
         .work-card-tag {
@@ -852,8 +864,10 @@
         /* ============ TESTIMONIALS ============ */
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
         }
         .testimonial-card {
             background: var(--surface-glass);
@@ -1203,36 +1217,6 @@
             </div>
         </div>
 
-        <div class="work-card fade-in">
-            <div class="work-card-visual card-theme-orange">
-                <div class="bg-pattern"></div>
-                <div class="reel-sample">
-                    <div class="reel-wave"></div>
-                </div>
-            </div>
-            <div class="work-card-info">
-                <span class="work-card-tag">Sample · Reel</span>
-                <h3 class="work-card-title">Dhaka Cafe — Pizza Reel</h3>
-                <p class="work-card-desc">A 20-second 9:16 auto-loop food reel, with a screen-record guide + CapCut workflow.</p>
-                <a href="reel-dhaka-cafe.html" class="work-card-link">Open full page →</a>
-            </div>
-        </div>
-
-        <div class="work-card fade-in">
-            <div class="work-card-visual card-theme-pink">
-                <div class="bg-pattern"></div>
-                <div class="overlay-text">
-                    🤙 ONE<br>CLICK ♪<br>
-                    <span style="font-size:13px; font-weight:500; color: rgba(255,255,255,0.5);">ORIGINAL SONG · royalty-free</span>
-                </div>
-            </div>
-            <div class="work-card-info">
-                <span class="work-card-tag">Sample · Reel + music</span>
-                <h3 class="work-card-title">Reel Maker — Original Song</h3>
-                <p class="work-card-desc">One click records a 20s webm with a royalty-free synthesized score — export straight to CapCut.</p>
-                <a href="reel-dhaka-cafe-maker.html" class="work-card-link">Open full page →</a>
-            </div>
-        </div>
     </div>
 
     <div class="spec-note fade-in">
@@ -1368,18 +1352,6 @@
     </div>
 
     <div class="testimonials-grid">
-        <div class="testimonial-card fade-in">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-text">"The posts completely transformed our Instagram feed. Our engagement went up 3x in just two weeks."</p>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar">R</div>
-                <div>
-                    <div class="testimonial-name">Rafiq Ahmed</div>
-                    <div class="testimonial-role">Owner, Dhaka Bites Cafe</div>
-                </div>
-            </div>
-        </div>
-
         <div class="testimonial-card fade-in">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">"Finally someone who delivers on time, every time. The reel scripts are fire — our views doubled."</p>
