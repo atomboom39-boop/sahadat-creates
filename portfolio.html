@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0A0A0B">
     <title>Sahadat Creates — Instagram content studio in Dhaka, Bangladesh</title>
-    <meta name="description" content="Sahadat Creates is a one-person Instagram content studio in Dhaka making posts, reels, carousels and captions for food, fashion, beauty and fitness brands. You see a sample post before you decide — no obligation.">
+    <meta name="description" content="Professional Instagram content studio in Dhaka serving food, fashion, beauty and fitness brands with posts, reels, carousels and captions that convert followers into customers.">
 
     <style>
         /* ————— reset ————— */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
 
-        /* ————— tokens ————— */
+        /* ————— design tokens ————— */
         :root {
             --bg: #0A0A0B;
             --ink: #EDEAE4;
@@ -46,7 +46,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        /* ————— scroll progress ————— */
+        /* ————— scroll progress bar ————— */
         .progress {
             position: fixed;
             top: 0; left: 0;
@@ -57,14 +57,14 @@
             transition: width 0.1s linear;
         }
 
-        /* ————— a11y focus ————— */
+        /* ————— focus states ————— */
         :focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 3px;
         }
         ::selection { background: var(--accent); color: var(--accent-ink); }
 
-        /* ————— type helpers ————— */
+        /* ————— typography ————— */
         h1, h2, h3 { font-family: var(--font-display); font-weight: 400; text-wrap: balance; }
         .eyebrow {
             font-size: 11px;
@@ -85,7 +85,7 @@
 
         .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
-        /* ————— layouts ————— */
+        /* ————— sections ————— */
         section { padding: var(--pad-section) 0; position: relative; }
         .section-head { max-width: 620px; margin-bottom: clamp(3rem, 6vw, 5rem); }
         .section-head.tight { max-width: 440px; }
@@ -97,7 +97,7 @@
         }
         .section-head p { color: var(--muted); max-width: 56ch; }
 
-        /* ————— reveal motion ————— */
+        /* ————— reveal animation ————— */
         @media (prefers-reduced-motion: no-preference) {
             .reveal {
                 opacity: 0;
@@ -111,7 +111,7 @@
             .reveal { opacity: 1; }
         }
 
-        /* ————— nav ————— */
+        /* ————— navigation ————— */
         .nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -137,9 +137,14 @@
             font-size: 19px;
             letter-spacing: 0.01em;
             color: var(--ink);
+            text-decoration: none;
         }
         .wordmark .dot { color: var(--accent); }
-        .nav-links { display: none; list-style: none; gap: 2.5rem; }
+        .nav-links {
+            display: none;
+            list-style: none;
+            gap: 2.5rem;
+        }
         .nav-links a {
             color: var(--muted);
             text-decoration: none;
@@ -197,6 +202,7 @@
             text-decoration: none;
             padding: 14px 0;
             border-bottom: 1px solid var(--line);
+            transition: color 150ms ease;
         }
         .mobile-menu a.mm-link:hover { color: var(--accent); }
         .mobile-menu .mm-cta {
@@ -208,7 +214,9 @@
             text-decoration: none;
             padding: 16px;
             border-radius: 2px;
+            transition: background 150ms ease;
         }
+        .mobile-menu .mm-cta:hover { background: #e3b264; }
         .mobile-menu .mm-foot {
             margin-top: auto;
             color: var(--muted);
@@ -237,7 +245,7 @@
             max-width: 16ch;
             margin-bottom: 1.75rem;
         }
-        .hero h1 em { font-style: italic; }
+        .hero h1 em { font-style: italic; color: var(--ink); }
         .hero-lede {
             color: var(--muted);
             font-size: 18px;
@@ -246,7 +254,6 @@
             margin-bottom: 2.75rem;
         }
         .hero-actions { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
-        .hero-actions .btn-primary { margin-bottom: 1rem; }
         .text-link {
             color: var(--muted);
             font-size: 15px;
@@ -266,7 +273,7 @@
         }
         .hero-sectors strong { color: var(--ink); font-weight: 500; }
 
-        /* ————— buttons (shared) ————— */
+        /* ————— buttons ————— */
         .btn-primary {
             display: inline-block;
             background: var(--accent);
@@ -289,7 +296,7 @@
             text-decoration: none;
             padding: 12px 20px;
             border-radius: 2px;
-            transition: border-color 150ms ease, color 150ms ease;
+            transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
         }
         .btn-quiet:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -303,11 +310,14 @@
             .work-grid {
                 grid-template-columns: repeat(12, 1fr);
             }
-            .work-card.wide   { grid-column: span 7; }
-            .work-card.narrow { grid-column: span 5; }
+            .work-card.w7   { grid-column: span 7; }
+            .work-card.w5 { grid-column: span 5; }
+            .work-card.w4 { grid-column: span 4; }
         }
         .work-card {
             display: block;
+            text-decoration: none;
+            color: inherit;
             border: 1px solid var(--line);
             border-radius: 3px;
             padding: 12px;
@@ -324,9 +334,6 @@
             overflow: hidden;
             border: 1px solid var(--line);
             background: #0D0D0F;
-        }
-        .thumb.wide {
-            aspect-ratio: 21 / 9;
         }
         .work-card h3 {
             font-size: clamp(1.5rem, 3vw, 1.9rem);
@@ -353,26 +360,29 @@
             max-width: 62ch;
         }
 
-        /* ——— thumbnails: six distinct CSS compositions ——— */
-        /* 1 · before / after split */
+        /* ————— CSS thumbnail compositions ————— */
+
+        /* 1 · split before/after */
         .t-split { display: grid; grid-template-columns: 1fr 1fr; }
-        .t-split .side { position: relative; display: flex; align-items: center; padding: 20px; }
+        .t-split .side { position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .t-split .before { background: linear-gradient(135deg, #141416 0%, #0A0A0B 100%); }
         .t-split .after  { background: linear-gradient(135deg, #D6A24B 0%, #B98A3C 100%); }
-        .t-split .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--line); }
+        .t-split .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--line); z-index: 1; }
+        .t-split .content { text-align: center; z-index: 2; }
         .t-split .label {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: rgba(250,250,245,0.55);
+            color: rgba(250,250,245,0.5);
+            margin-bottom: 8px;
         }
-        .t-split .after .label { color: rgba(10,10,11,0.7); }
+        .t-split .after .label { color: rgba(10,10,11,0.65); }
         .t-split .figure {
             font-family: var(--font-display);
-            font-size: clamp(1.4rem, 3vw, 2.2rem);
-            line-height: 1;
-            margin-top: 6px;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            line-height: 1.15;
             color: #EDEAE4;
+            max-width: 14ch;
         }
         .t-split .after .figure { color: var(--accent-ink); }
 
@@ -394,7 +404,7 @@
         .t-deck .card.c1 { top: 14%; transform: rotate(-3deg); z-index: 1; }
         .t-deck .card.c2 { top: 26%; transform: rotate(-1deg); z-index: 2; }
         .t-deck .card.c3 { top: 38%; transform: rotate(2deg); z-index: 3; border-color: var(--accent); }
-        .t-deck .num { font-family: var(--font-display); font-size: 26px; color: var(--muted); }
+        .t-deck .num { font-family: var(--font-display); font-size: 26px; color: var(--muted); line-height: 1; }
         .t-deck .bar { width: 34%; height: 3px; background: var(--line); align-self: center; }
         .t-deck .bar.fill { background: var(--accent); }
 
@@ -410,7 +420,7 @@
             overflow: hidden;
         }
         .t-reel .rat { position: absolute; top: 8px; left: 10px; font-size: 9px; letter-spacing: 0.14em; color: var(--muted); }
-        .t-reel .prev {
+        .t-reel .play-icon {
             position: absolute; left: 50%; top: 50%;
             transform: translate(-50%, -50%);
             width: 0; height: 0;
@@ -436,11 +446,10 @@
             inset: 12px;
             border: 1px solid rgba(10,10,11,0.35);
         }
-        .t-duotone .kicker { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(10,10,11,0.66); }
-        .t-duotone .menu-name { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 0.95; color: var(--accent-ink); }
+        .t-duotone .kicker { font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(10,10,11,0.66); z-index: 1; position: relative; }
+        .t-duotone .menu-name { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.6rem); line-height: 0.95; color: var(--accent-ink); z-index: 1; position: relative; }
 
         /* 5 · grid plan */
-        .t-grid { }
         .t-grid .cells {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -459,7 +468,13 @@
         }
 
         /* 6 · caption bank */
-        .t-caption { padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+        .t-caption {
+            padding: 26px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            justify-content: center;
+        }
         .t-caption .rule { height: 7px; border-radius: 2px; background: #1C1C1F; }
         .t-caption .rule.s { width: 55%; }
         .t-caption .rule.m { width: 78%; }
@@ -470,7 +485,6 @@
         .services-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 4vw, 3rem); }
         @media (min-width: 720px) {
             .services-grid { grid-template-columns: 1fr 1fr; column-gap: clamp(2.5rem, 5vw, 4rem); row-gap: 3.5rem; }
-            .service-item:nth-child(odd) { padding-right: 3rem; }
         }
         .service-item .icon {
             width: 20px; height: 20px;
@@ -536,9 +550,21 @@
         .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
         @media (min-width: 820px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 0; } }
         .plan { border: 1px solid var(--line); border-radius: 3px; padding: clamp(1.75rem, 4vw, 2.5rem); display: flex; flex-direction: column; }
-        @media (min-width: 820px) { .plan { border-right: none; } .plan:last-child { border-right: 1px solid var(--line); } }
-        .plan.featured { border-color: var(--accent); position: relative; }
-        @media (min-width: 820px) { .plan.featured { margin: -14px 0; padding-top: calc(2.5rem + 14px); padding-bottom: calc(2.5rem + 14px); } }
+        @media (min-width: 820px) {
+            .plan { border-right: none; border-radius: 0; }
+            .plan:first-child { border-radius: 3px 0 0 3px; }
+            .plan:last-child { border-right: 1px solid var(--line); border-radius: 0 3px 3px 0; }
+        }
+        .plan.featured { border-color: var(--accent); position: relative; z-index: 1; }
+        @media (min-width: 820px) {
+            .plan.featured {
+                margin: -14px 0;
+                padding-top: calc(2.5rem + 14px);
+                padding-bottom: calc(2.5rem + 14px);
+                border-radius: 3px;
+                border-right: 1px solid var(--accent);
+            }
+        }
         .plan .badge {
             position: absolute;
             top: -12px; left: 1.5rem;
@@ -549,6 +575,7 @@
             text-transform: uppercase;
             padding: 5px 12px;
             border-radius: 2px;
+            font-weight: 600;
         }
         .plan-name { font-size: 15px; color: var(--muted); letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
         .plan-price { font-family: var(--font-display); font-size: clamp(2.6rem, 5vw, 3.4rem); letter-spacing: -0.02em; line-height: 1; }
@@ -566,7 +593,7 @@
         }
         .plan li:last-child { border-bottom: 1px solid var(--line); }
         .plan li svg { flex-shrink: 0; margin-top: 3px; color: var(--accent); }
-        .plan .btn-quiet { align-self: flex-start; }
+        .plan .btn-quiet { align-self: flex-start; width: 100%; text-align: center; }
         .plan.featured .btn-quiet { border-color: var(--accent); color: var(--accent); }
         .plan.featured .btn-quiet:hover { background: var(--accent); color: var(--accent-ink); }
         .pricing-note { margin-top: 2rem; color: var(--muted); font-size: 15px; }
@@ -615,13 +642,7 @@
             .menu-toggle { display: none; }
         }
 
-        /* ————— extra small ————— */
-        @media (max-width: 400px) {
-            .hero h1 { font-size: 2.6rem; }
-            .closing h2 { font-size: 2.7rem; }
-        }
-
-        /* reduce text-wrap where unsupported */
+        /* ————— reduce text-wrap where unsupported ————— */
         @supports not (text-wrap: balance) {
             h1, h2, h3 { text-wrap: normal; }
         }
@@ -634,7 +655,7 @@
 
 <!-- ————— mobile menu ————— -->
 <div class="mobile-menu" id="mobileMenu">
-    <nav aria-label="Mobile">
+    <nav aria-label="Mobile navigation">
         <a class="mm-link" href="#work">Work</a>
         <a class="mm-link" href="#services">Services</a>
         <a class="mm-link" href="#process">Process</a>
@@ -644,11 +665,11 @@
     <p class="mm-foot">Dhaka, Bangladesh<br>Replies within 24 hours</p>
 </div>
 
-<!-- ————— nav ————— -->
+<!-- ————— navigation ————— -->
 <header class="nav" id="nav">
     <div class="wrap nav-inner">
         <a href="#top" class="wordmark" aria-label="Sahadat Creates, back to top">Sahadat Creates<span class="dot">.</span></a>
-        <nav aria-label="Primary">
+        <nav aria-label="Primary navigation">
             <ul class="nav-links">
                 <li><a href="#work">Work</a></li>
                 <li><a href="#services">Services</a></li>
@@ -675,8 +696,8 @@
     <section class="hero" aria-label="Introduction">
         <div class="wrap hero-inner">
             <p class="hero-eyebrow reveal in">Instagram content studio · Dhaka</p>
-            <h1 class="reveal in">Content that turns followers into <em>orders</em>.</h1>
-            <p class="hero-lede reveal in">Posts, reels, carousels and captions for food, fashion, beauty and fitness brands — planned, written and built by one person who shows up on time.</p>
+            <h1 class="reveal in">Content that turns followers into <em>customers</em>.</h1>
+            <p class="hero-lede reveal in">Posts, reels, carousels and captions for food, fashion, beauty and fitness brands — planned, written and made by one person who shows up on time.</p>
             <div class="hero-actions reveal in">
                 <a href="https://wa.me/8801902960530" class="btn-primary">Message on WhatsApp</a>
                 <a href="#work" class="text-link">See the work</a>
@@ -685,29 +706,29 @@
         </div>
     </section>
 
-    <!-- ————— work ————— -->
+    <!-- ————— selected work ————— -->
     <section id="work" aria-label="Selected work">
         <div class="wrap">
             <div class="section-head reveal">
                 <p class="eyebrow">Selected work</p>
                 <h2>Six pieces, one standard.</h2>
-                <p>Each thumbnail below is a study in a different part of the job. They are spec pieces, made to show the level before you decide on anything.</p>
+                <p>Each thumbnail below is a study in a different part of the work. They are spec pieces, made to show the level before you decide on anything.</p>
             </div>
 
             <div class="work-grid">
-                <article class="work-card wide reveal">
-                    <div class="thumb wide t-split" role="img" aria-label="Before and after split panel, two halves">
+                <article class="work-card w7 reveal">
+                    <div class="thumb t-split" role="img" aria-label="Before and after split panel comparison">
                         <div class="side before">
-                            <div>
-                                <span class="label">Before</span>
-                                <div class="figure">A feed that posts on a whim.</div>
+                            <div class="content">
+                                <div class="label">Before</div>
+                                <div class="figure">A feed that posts on a whim</div>
                             </div>
                         </div>
                         <div class="divider" aria-hidden="true"></div>
                         <div class="side after">
-                            <div>
-                                <span class="label">After</span>
-                                <div class="figure">A feed that has a plan.</div>
+                            <div class="content">
+                                <div class="label">After</div>
+                                <div class="figure">A feed that has a plan</div>
                             </div>
                         </div>
                     </div>
@@ -716,22 +737,22 @@
                     <p>A single square that sells the change. Layout, hierarchy, one clear message.</p>
                 </article>
 
-                <article class="work-card narrow reveal">
+                <article class="work-card w5 reveal">
                     <div class="thumb t-deck" role="img" aria-label="Three stacked carousel slides">
                         <div class="card c1"><span class="num">01</span><span class="bar" aria-hidden="true"></span></div>
                         <div class="card c2"><span class="num">02</span><span class="bar fill" aria-hidden="true"></span></div>
                         <div class="card c3"><span class="num">03</span><span class="bar" aria-hidden="true"></span></div>
                     </div>
                     <span class="card-cat">Carousel</span>
-                    <h3>Five post ideas, one deck.</h3>
+                    <h3>Five ideas, one deck.</h3>
                     <p>A seven-slide carousel about posts that sell, built as the deck itself.</p>
                 </article>
 
-                <article class="work-card narrow reveal">
-                    <div class="thumb t-reel" role="img" aria-label="Vertical reel frame with play marker">
+                <article class="work-card w5 reveal">
+                    <div class="thumb t-reel" role="img" aria-label="Vertical reel frame with play control">
                         <div class="frame">
                             <span class="rat">9:16</span>
-                            <span class="prev" aria-hidden="true"></span>
+                            <span class="play-icon" aria-hidden="true"></span>
                             <span class="scrub" aria-hidden="true"></span>
                         </div>
                     </div>
@@ -740,8 +761,8 @@
                     <p>Hook, beat, payoff. Written to be shot on a phone and cut in CapCut.</p>
                 </article>
 
-                <article class="work-card wide reveal">
-                    <div class="thumb wide t-duotone" role="img" aria-label="Duotone menu relaunch composition">
+                <article class="work-card w7 reveal">
+                    <div class="thumb t-duotone" role="img" aria-label="Duotone menu relaunch composition">
                         <span class="kicker">Relaunch · 01</span>
                         <span class="menu-name">Menu</span>
                     </div>
@@ -750,7 +771,7 @@
                     <p>A cafe menu that trusted one accent instead of four, and read better for it.</p>
                 </article>
 
-                <article class="work-card narrow reveal">
+                <article class="work-card w4 reveal">
                     <div class="thumb t-grid" role="img" aria-label="Grid plan with one highlighted cell">
                         <div class="cells">
                             <span class="cell hot" aria-hidden="true"></span>
@@ -767,10 +788,10 @@
                     </div>
                     <span class="card-cat">Strategy</span>
                     <h3>A feed grid, planned cell by cell.</h3>
-                    <p>One accent cell in a disciplined grid. The eye always knows where to land.</p>
+                    <p>One accent cell in a disciplined grid. The eye knows where to land.</p>
                 </article>
 
-                <article class="work-card narrow reveal">
+                <article class="work-card w4 reveal">
                     <div class="thumb t-caption" role="img" aria-label="Bank of caption lines">
                         <span class="rule s" aria-hidden="true"></span>
                         <span class="rule l" aria-hidden="true"></span>
@@ -780,11 +801,24 @@
                     </div>
                     <span class="card-cat">Copy</span>
                     <h3>Fifty captions, one voice.</h3>
-                    <p>A caption bank, written so a brand never has to post with "No caption needed".</p>
+                    <p>A caption bank, written so a brand never has to post with no caption needed.</p>
+                </article>
+
+                <article class="work-card w4 reveal">
+                    <div class="thumb t-caption" role="img" aria-label="Text-heavy composition">
+                        <span class="rule m" aria-hidden="true"></span>
+                        <span class="rule s" aria-hidden="true"></span>
+                        <span class="rule l" aria-hidden="true"></span>
+                        <span class="rule m" aria-hidden="true"></span>
+                        <span class="rule hot" aria-hidden="true"></span>
+                    </div>
+                    <span class="card-cat">Copywriting</span>
+                    <h3>Captions that earn engagement.</h3>
+                    <p>The words under the post. Written to be read, not skipped.</p>
                 </article>
             </div>
 
-            <p class="spec-note reveal">These six are spec pieces, built to show quality before you pay for anything. Client work starts the moment you send the first message.</p>
+            <p class="spec-note reveal">These are spec pieces, built to show quality before you pay for anything. Client work starts the moment you send the first message.</p>
         </div>
     </section>
 
@@ -801,21 +835,25 @@
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="16.4" cy="7.6" r="0.4" fill="currentColor"/></svg>
                     <h3>Photo posts</h3>
                     <p>Square crops and clean type. A feed that looks planned on purpose, not posted by accident.</p>
+                    <p>Built with design constraint — one accent, deliberate whitespace, legibility first.</p>
                 </div>
                 <div class="service-item reveal">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M10.5 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
                     <h3>Reels and scripts</h3>
                     <p>Twenty-second loops with a hook up front and a payoff at the end. The format the platform rewards.</p>
+                    <p>Written to be shot on a phone, edited in CapCut, and posted the same day.</p>
                 </div>
                 <div class="service-item reveal">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M2 11l2 -2 2 2M20 11l2 -2 2 2" transform="translate(-2 1)"/><path d="M8 12.5l-2 1.6 2 1.6M16 12.5l2 1.6-2 1.6"/></svg>
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M8 12.5l-2 1.6 2 1.6M16 12.5l2 1.6-2 1.6"/></svg>
                     <h3>Carousels</h3>
                     <p>Multi-slide posts that teach or show. Built slide by slide, designed to be saved more than liked.</p>
+                    <p>The format that earns reach without dancing in front of a camera.</p>
                 </div>
                 <div class="service-item reveal">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14M7 12h10M9 17h6"/></svg>
                     <h3>Captions and strategy</h3>
                     <p>The words under the post and the hashtags that earn reach. The plan behind the posting calendar.</p>
+                    <p>No filler, no generic call to action. Captions written in the brand voice.</p>
                 </div>
             </div>
 
@@ -980,7 +1018,7 @@
 
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* — scroll progress + nav state — */
+    /* scroll progress + nav state */
     var progress = document.getElementById("progress");
     var nav = document.getElementById("nav");
     function onScroll() {
@@ -992,7 +1030,7 @@
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    /* — mobile menu — */
+    /* mobile menu */
     var toggle = document.getElementById("menuToggle");
     var menu = document.getElementById("mobileMenu");
     toggle.addEventListener("click", function () {
@@ -1005,21 +1043,23 @@
         link.addEventListener("click", function () {
             menu.classList.remove("open");
             toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open menu");
             document.body.style.overflow = "";
         });
     });
 
-    /* — mobile menu Escape — */
+    /* mobile menu escape key */
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && menu.classList.contains("open")) {
             menu.classList.remove("open");
             toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Open menu");
             document.body.style.overflow = "";
             toggle.focus();
         }
     });
 
-    /* — reveal on scroll — */
+    /* reveal on scroll */
     var reveals = document.querySelectorAll(".reveal");
     if (reduce || !("IntersectionObserver" in window)) {
         reveals.forEach(function (el) { el.classList.add("in"); });
